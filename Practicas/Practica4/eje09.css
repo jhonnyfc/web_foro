@@ -1,0 +1,44 @@
+div#tiT {
+    background-color: yellow;
+    border: black;
+    border-style: dashed;
+    display:inline-block;
+}
+
+h1 {
+    text-align-last: center;
+    color: green;
+}
+
+div#bodY {
+    background-color: purple;
+    width: 50%;
+    border: black;
+    border-style: dashed;
+    display:inline-block;
+}
+
+p {
+    color: seashell;
+    text-decoration: underline;
+}
+
+div#cuaD {
+    background-color: gray;
+    height: 150px;
+    width: 150px;
+    border: black;
+    border-style: dashed;
+    display:inline-block;
+    float: right;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    background-color: chartreuse;
+}
+
+body {
+    background-color: skyblue;
+}

@@ -1,24 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma-rtl.min.css">
         <title> Primer ejemplo en HTML 5 </title>
     </head>
     <body>
-        <ol id = "indi">
-            <li><a href="#css_sec">html</a></li>
-            <li><a href="#html_sec">css</a></li>
-        </ol>
+        <div class="container">
 
-        <ol id = "css_sec">
-            <li><a href="./eje1.html">eje1</a></li>
-            <li><a href="">css</a></li>
-        </ol>
+            <div class="tile is-vertical notification is-primary">
+                <ol id = "indi">
+                    <li><a href="#css_sec">html</a></li>
+                    <li><a href="#html_sec">css</a></li>
+                </ol>
+            </div>
 
-        <ol id = "html_sec">
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-        </ol>
-
-        <a href="#indi"> Arriba</a>
+            <div class="box">
+                <section class="section">
+                    <h1 class="title">HTML</h1>
+                    <ol id = "css_sec">
+                        <li><a href="./eje1.html" target="_blank">eje1</a></li>
+                        <li><a href="./eje2.html" target="_blank">eje2</a></li>
+                        <li><a href="./eje3.html" target="_blank">eje3</a></li>
+                        <li><a href="./eje4.html" target="_blank">eje4</a></li>
+                        <li><a href="./eje5.html" target="_blank">eje5</a></li>
+                        <li><a href="./eje6.html" target="_blank">eje6</a></li>
+                        <li><a href="./eje7.html" target="_blank">eje7</a></li>
+                    </ol>
+                </section>
+            </div>
+            
+            <div class="box">
+                <section class="section">
+                    <h1 class="title">CSS</h1>
+                    <ol id = "html_sec">
+                        <li><a href="../Practica4/eje08.html" target="_blank">eje8</a></li>
+                        <li><a href="../Practica4/eje09.html" target="_blank">eje9</a></li>
+                        <li><a href="../Practica4/eje10.html" target="_blank">eje10</a></li>
+                        <li><a href="../Practica4/eje11a.html" target="_blank">eje11a</a></li>
+                        <li><a href="../Practica4/eje11b.html" target="_blank">eje11b</a></li>
+                        <li><a href="../Practica4/eje12.html" target="_blank">eje12</a></li>
+                        <li><a href="../Practica4/eje13.html" target="_blank">eje13</a></li>
+                        <li><a href="../Practica4/eje14.html" target="_blank">eje14</a></li>
+                    </ol>
+                  </section>
+            </div>
+    
+            
+            <button class="button is-rounded">
+                <a href="#indi"> Ir arriba</a>
+            </button>
+        </div>
     </body>
 </html>
