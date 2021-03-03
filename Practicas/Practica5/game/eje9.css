@@ -1,0 +1,12 @@
+#myCont {
+    display: inline-flex;
+}
+
+#gameLay {
+    float: inline-start;
+}
+
+#myChat {
+    margin-left: 50px;
+    float: inline-start;
+}
