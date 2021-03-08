@@ -28,8 +28,16 @@
     switch ($accion) {
         case "show_board":
             switch ($id) {
+                case '1':# mostrar inicio sesion por primer vez;
+                    mostarInicio();
+                    break;
+            }
+        break;
+        case "iniciar":
+            switch ($id) {
                 case '1':# mostrar inicio sesion por primer vez
                     mostarJuego();
+                   // mostarInicio();
                     break;
             }
         break;
