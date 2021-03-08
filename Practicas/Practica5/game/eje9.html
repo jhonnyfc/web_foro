@@ -9,35 +9,55 @@
         <script src="//cdn.jsdelivr.net/npm/phaser@3.52.0/dist/phaser.js"></script>
         <script src="//cdn.jsdelivr.net/npm/phaser@3.52.0/dist/phaser.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
+        <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
         <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
     </head>
     <body>
         
         <div id="myCabera">
-            <h1>#nombreGamer#</h1> <br> 
-            <h2>#Puntuacion#</h2>   
+            <h1 id="nombreGamer">#nombreGamer#</h1> <br> 
+            <h2 id="puntuacionGame">#Puntuacion#</h2>   
         </div>
 
         <div id="myCont">
-
-            
-
             <div id="myChat">
-                <h2>el chat va aqui</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis vero, quisquam ex libero quaerat atque illum magni, ea temporibus mollitia autem voluptatibus ducimus cumque qui eligendi! Odio quam ut corporis.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque molestiae delectus perspiciatis iure quo, facere molestias sapiente similique, corrupti adipisci deleniti commodi perferendis accusantium ullam tempore neque voluptate minus officia.</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis vero, quisquam ex libero quaerat atque illum magni, ea temporibus mollitia autem voluptatibus ducimus cumque qui eligendi! Odio quam ut corporis.</p>
+                <div class='container'>
+                    <div class='chatbox' >
+
+                        <!-- <div class="chatbox__messages" ng-repeat="message in messages">
+                            <div class="chatbox__messages__user-message" id="lastMsg">
+
+                                <div class="chatbox__messages__user-message--ind-message">
+                                    <p class="name">#miNombre#</p>
+                                    <br/>
+                                    <p class="message">#miMensaje#</p>
+                                </div>
+
+                            </div>
+                        </div> -->
+
+                        <div class="chatbox__messages" >
+                            <div class="chatbox__messages__user-message" id="otherMsg">
+                                <!-- meter aqui los mensajes -->
+                            </div>
+                        </div>  
+
+                        <form id="formCaht">
+                            <input type="text" placeholder="Type Message" id="mymsg">
+                            <input type="submit" style="position: absolute; left: -9999px"/>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <div id="gameLay">
             </div>
         </div>
 
-        <div id="myFoot">
+        <!-- <div id="myFoot">
             <h2>some info </h2>
-        </div>
+        </div> -->
         <script src="eje9.js"></script>
 
         <div id='stars2'></div>

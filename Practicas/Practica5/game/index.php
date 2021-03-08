@@ -36,9 +36,43 @@
         case "iniciar":
             switch ($id) {
                 case '1':# mostrar inicio sesion por primer vez
-                    mostarJuego();
-                   // mostarInicio();
+                    $res = verificaCreaUser();
+                    if ($res){
+                        mostarJuego();
+                    } else {
+                        // Error al iniar la comprobaion de los datos
+                        echo "bad";
+                    }
                     break;
+                case "2":
+                    mostarJuegoLevel(leeLevl());
+                    break;
+            }
+        break;
+        case "chat":
+            switch ($id) {
+                case '1':# mostrar inicio sesion por primer vez
+                    $cosas = meteMensaje();
+                    if ($cosas[0] == "1")
+                        crearMensajes($cosas);
+                    else{
+                        $res = array();
+                        $res[0] = "0";
+                        $res[1] = "datos no mal";
+                        echo json_encode($res);
+                    }
+                break;
+                case '2':# mostrar inicio sesion por primer vez
+                    $cosas = get5Mensajes();
+                    if ($cosas != false)
+                        crearMensajes($cosas);
+                    else{
+                        $res = array();
+                        $res[0] = "0";
+                        $res[1] = "datos no mal";
+                        echo json_encode($res);
+                    }
+                break;
             }
         break;
     }

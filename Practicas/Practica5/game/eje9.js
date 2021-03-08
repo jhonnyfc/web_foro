@@ -28,8 +28,8 @@ var muro = (Math.random()*2|0) + 1
 var suelo = 0
 
 var sqSize = 32
-var nrow = 15
-var ncol = 15
+var nrow = 5 + 5 * (parseInt(document.getElementById("puntuacionGame").innerHTML)/1000)
+var ncol =  5 + 5 * (parseInt(document.getElementById("puntuacionGame").innerHTML)/1000)
 var ini =  new Array(2).fill(0)
 var fin = new Array(2).fill(0)
 var tileSZ = new Array(2).fill(0)
@@ -38,8 +38,8 @@ var tilName = ['tiles1','tiles2']
 var config = {
     type: Phaser.WEBGL,
 	//type: Phaser.AUTO,
-    width: 700,
-    height: 650,
+    width: 600,
+    height: 550,
     parent: 'gameLay',
     pixelArt: true,
     backgroundColor: '#1a1a2d',
@@ -99,6 +99,7 @@ function create () {
             player.x -= tileSZ[1];
             player.angle = 180;
         }
+		calculaWin()
     });
 
     //  Right
@@ -112,6 +113,7 @@ function create () {
             player.x += tileSZ[1];
             player.angle = 0;
         }
+		calculaWin()
     });
 
     //  Up
@@ -125,6 +127,7 @@ function create () {
             player.y -= tileSZ[0];
             player.angle = -90;
         }
+		calculaWin()
     });
 
     //  Down
@@ -138,6 +141,8 @@ function create () {
             player.y += tileSZ[0];
             player.angle = 90;
         }
+
+		calculaWin()
     });
 
 	light = this.lights.addLight(10, 10, 200).setScrollFactor(0.0);
@@ -162,6 +167,7 @@ function create () {
 function update () {
 	light.x = player.x;
     light.y = player.y;
+
 	
 /*/
 	var index = 0;
@@ -173,6 +179,37 @@ function update () {
             index += 1;
         }
     });*/
+}
+
+function calculaWin (){
+	if ((player.y/tileSZ[0] | 0) == fin[0] && (player.x/tileSZ[1] | 0) == fin[1]) {
+		var f = document.createElement("form");
+		f.method = "post"
+		f.action = "index.php"
+
+		var s = document.createElement("input"); //input element, Submit button
+		s.setAttribute('type',"text");
+		s.setAttribute('name',"levelG");
+		s.setAttribute('value', parseInt(document.getElementById("puntuacionGame").innerHTML));
+
+		var s2 = document.createElement("input"); //input element, Submit button
+		s2.setAttribute('type',"text");
+		s2.setAttribute('name',"accion");
+		s2.setAttribute('value', "iniciar");
+
+		var s3 = document.createElement("input"); //input element, Submit button
+		s3.setAttribute('type',"text");
+		s3.setAttribute('name',"id");
+		s3.setAttribute('value',"2");
+
+		f.appendChild(s);
+		f.appendChild(s2);
+		f.appendChild(s3);
+
+		//window.open('', 'TheWindow');
+		document.body.appendChild(f);
+		f.submit();
+	}
 }
 
 /******************************************************************************************************* */
@@ -319,3 +356,51 @@ function nexLevel(level,nickName){
 		}
 	})
 }
+
+
+/*************************************************************************/
+/***************** Cosas del chat *********************/
+/*************************************************************************/
+$("#formCaht").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+	var mensaje = document.getElementById("mymsg").value
+	var nombre = document.getElementById("nombreGamer").innerHTML
+	document.getElementById("mymsg").value = "";
+
+	document.getElementById("mymsg").disabled = true;
+	setTimeout(function(){document.getElementById("mymsg").disabled = false;},5000);
+
+    $.ajax({
+           type: "POST",
+            url: "index.php",
+			dataType: "json",
+            data: {id:"1",accion:"chat",inMensaje:mensaje, inName:nombre},
+            success: function(data){
+				if (data[0] == "0")
+					alert(data[1])
+				else
+					document.getElementById("otherMsg").innerHTML = data[1];
+            }
+	});
+});
+
+setTimeout(
+	function(){
+		setInterval(function(){ 
+			$.ajax({
+				type: "POST",
+				url: "index.php",
+				dataType: "json",
+				data: {id:"2",accion:"chat"},
+				success: function(data){
+					if (data[0] == "0")
+						alert(data[1])
+					else
+						document.getElementById("otherMsg").innerHTML = data[1];
+				}
+			});
+		}, 5000)
+	},
+2000);

@@ -26,10 +26,10 @@ html {
   }
 
 #myCabera {
-    background-color: skyblue;
     align-content: center;
     text-align: center;
     margin-top: 20px;
+    color:white;
 }
 
 #myCont {
@@ -37,30 +37,171 @@ html {
     margin-left: 10%;
     width: 75%;
     display: inline-block;
-    background-color: chartreuse;
 }
 
 #gameLay {
     /*margin-left: 20%;*/
-    width: 701px;
-    height: 651px;
-    background-color: red;
+    width: 601px;
+    height: 551px;
 }
 
 #myChat {
     width: 30%;
     float: right;
-    background-color: royalblue;
 }
 
 #myFoot {
     margin-top: 10px;
-    background-color: springgreen;
+    color: aliceblue;
 }
 
+/*********************************************************************************************************/
+/*https://code.tutsplus.com/tutorials/how-to-create-a-simple-web-based-chat-application--net-5931*/
+/*********************************************************************************************************/
 
-  
+/**************************************************************************/
+/*https://bootsnipp.com/snippets/mMr2l*/
+/**************************************************************************/
+
+.chatbox {
+    background: rgba(255, 255, 255, 0.05);
+    width: 200px;
+    height: 75%;
+    border-radius: 0.2em;
+    position: relative;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chatbox__messages:nth-of-type(odd) .chatbox__messages__user-message--ind-message {
+    float: right;
+}
+
+.chatbox__messages:nth-of-type(odd) .chatbox__messages__user-message--ind-message:after {
+    content: '';
+    position: absolute;
+    margin: -1.5em -17.06em;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(255, 255, 255, 0.2);
+}
+
+.chatbox__messages:nth-of-type(even) .chatbox__messages__user-message--ind-message {
+    float: left;
+}
+
+.chatbox__messages:nth-of-type(even) .chatbox__messages__user-message--ind-message:after {
+    content: '';
+    position: absolute;
+    margin: -1.5em 1.87em;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid rgba(255, 255, 255, 0.2);
+}
+
+.chatbox__messages__user-message {
+    width: 450px;
+}
+
+.chatbox__messages__user-message--ind-message {/**/
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1em 0;
+    height: auto;
+    width: 65%;
+    border-radius: 5px;
+    margin: 2em 1em;
+    overflow: auto;
+}
+
+.chatbox__messages__user-message--ind-message > p.name {/**/
+    color: #FFF;
+    font-size: 1em;
+}
+
+.chatbox__messages__user-message--ind-message > p.message { /**/
+    color: #FFF;
+    font-size: 0.7em;
+    margin: 0 2.8em;
+}
+
+.chatbox__user-list {
+    background: rgba(255, 255, 255, 0.1);
+    width: 25%;
+    height: 100%;
+    float: right;
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+}
+
+.chatbox__user-list h1 {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9em;
+    padding: 1em;
+    margin: 0;
+    font-weight: 300;
+    text-align: center;
+}
+
+.chatbox__user, .chatbox__user--active, .chatbox__user--busy, .chatbox__user--away {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 100%;
+    margin: 1em 0.7em;
+}
+
+.chatbox__user--active {
+    background: rgba(23, 190, 187, 0.8);
+}
+
+.chatbox__user--busy {
+    background: rgba(252, 100, 113, 0.8);
+}
+
+.chatbox__user--away {
+    background: rgba(255, 253, 130, 0.8);
+}
+
+.chatbox p {
+    float: left;
+    text-align: left;
+    margin: -0.25em 2em;
+    font-size: 0.7em;
+    font-weight: 300;
+    color: #FFF;
+    width: 200px;
+}
+
+/* .chatbox form {
+    background: #222;
+} */
+
+.chatbox form input {
+    background: rgba(255, 255, 255, 0.04);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: 1px;
+    border-color: rgba(0, 255, 255, 0.575);
+    border-style: solid;
+    width: 75%;
+    padding: 1.2em;
+    outline: none;
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+}
+
+h1,h2 {
+    font-family: "Copperplate",fantasy;
+}
+
+/**************************************************************************/  
 /*https://csshint.com/css-animated-backgrounds/*/
+/**************************************************************************/
+
 #stars2 {
     width: 2px;
     height: 2px;
