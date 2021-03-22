@@ -20,68 +20,46 @@ time, mark, audio, video {
 }
 
 .contenedor {
-    display: flex;
-    flex-direction: column;    
-    flex-wrap: wrap;
+    background-color: honeydew;
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: 1;
+    grid-gap: 0;
 }
 
 .cabecera {
-    display: flex;
-    flex-direction: row;    
-    flex-wrap: wrap;
-    padding: 10px;
-    background-color: beige;
-    justify-content: center;
-}
-
-.tituloCabe {
-    flex-basis: auto;
-}
-
-.imgLogo {
-    flex-basis: 20%;
+    background-color: skyblue;
+    grid-row: 1;
 }
 
 .mainCon {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: burlywood;
+    background-color: tan;
+    grid-row: 2 / 9;
+
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: 1;
 }
 
 .navega {
-    flex: 1;
+    grid-column: 1;
     padding: 20px;
     background-color: cyan;
 }
 
 .maBod{
-    flex-basis: 70%;
+    grid-column: 2 / 8;
     padding: 10px;
     background-color: thistle;
 }
 
-.tituloSec{
-    padding: 10px;
-}
-
-article {
-    padding: 10px;
-}
-
 .publAsi {
-    flex: 1;
+    grid-column: 8;
     padding: 10px;
     background-color: khaki;
 }
 
 .footerClas {
-    padding: 20px;
-    background-color: lightcyan;
-    flex: 1;
-}
-
-body {
-    background: skyblue;
+    background-color: wheat;
+    grid-row:  9;
 }
