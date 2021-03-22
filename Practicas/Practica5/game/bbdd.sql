@@ -1,6 +1,6 @@
 CREATE TABLE usuario(
     unickname       VARCHAR(20) NOT NULL,
-    upuntuacion     VARCHAR(20) NOT NULL,
+    upuntuacion     VARCHAR(20),
     upass           VARCHAR(255) NOT NULL,
 CONSTRAINT pk_user PRIMARY KEY (unickname));
 
