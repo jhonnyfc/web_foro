@@ -1,0 +1,50 @@
+stages:
+    - build
+    - test
+    - deploy
+
+build_a:
+    tags:
+        - guacamole
+    stage: build
+    script:
+        - echo "This job builds something."
+        - sleep 5
+build_b:
+    tags:
+        - guacamole
+    stage: build
+    script:
+        - echo "This job builds algo mas de b"
+
+test_a:
+    tags:
+        - guacamole
+    stage: test
+    script:
+        - echo "This job builds something."
+        - sleep 5
+
+test_b:
+    tags:
+        - guacamole
+    stage: test
+    script:
+        - echo "This job builds something."
+        - sleep 5
+
+deploy_a:
+    tags:
+        - guacamole
+    stage: deploy
+    script:
+        - echo "This job builds something."
+        - sleep 5
+
+deploy_b:
+    tags:
+        - guacamole
+    stage: deploy
+    script:
+        - echo "This job builds something."
+        - sleep 5
