@@ -1,0 +1,35 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+html {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+	min-height: 100%;
+	scroll-behavior: smooth;
+}
+
+#contLogin{
+    margin-top: 50px;
+    text-align: center;
+}
+
+#contLogin form{
+    margin-top: 25px;
+}
+
+#contLogin input{
+    font-size: 1.1em;
+    border: black;
+    border-style: solid;
+    border-width: 1.5px;
+    margin-top: 30px;
+    height: 45px;
+    width: 200px;
+}
+
+.buttonSubm:hover:not(.active) {
+	background-color: rgba(46, 46, 46, 0.555);
+}
