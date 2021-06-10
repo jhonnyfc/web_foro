@@ -1,0 +1,59 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+html {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+	min-height: 100%;
+	scroll-behavior: smooth;
+}
+
+#contForo{
+    margin-top: 50px;
+    text-align: center;
+}
+
+#contComments {
+	margin-top: 47px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    margin-bottom: 60px;
+}
+
+#contComments img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 151.1px;
+    width: 297.66px;
+	margin-bottom: 40px;
+}
+
+div.coment{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 650px;
+	border-width: 2px;
+	border:rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 2px;
+	text-align: left;
+	font-size: 1em;
+	padding: 5px;
+	margin-top: 28px;
+}
+
+.coment p{
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.paginado{
+	font-size: 1.1em;
+	margin-top: 25px;
+}
