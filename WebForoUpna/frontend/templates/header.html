@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="res/css/header.css">
-    <link rel="stylesheet" href="res/css/foro.css">
+    <link rel="stylesheet" href="res/css/crearComment.css">
     <title>Document</title>
 </head>
 <body>
@@ -19,26 +19,14 @@
         </div>
     </header>
 
-    <div id="contForo">
-        <h1>Titulo del Foro</h1>
-        <div id="contComments">
-            <img id="fotForo" src="res/default.webp" alt="">
-
-            <div class="coment">
-                <div>
-                    <h3>username</h3>
-                </div>
-                <div>
-                    <p>
-                        podra comentar con un limite de 250 palabras
-                    </p>
-                </div>
+    <div id="contMakeComment">
+        <h1>Crear commentario</h1>
+        <form action="">
+            <div>
+                <textarea name="textocomment" rows="16" cols="100" maxlength="1200"></textarea>
             </div>
-
-            <div class="paginado">
-                <a href="">1</a> | .. | <a href="">5</a> | <a href="">6</a> |  <a href="">7</a> |  <a href="">8</a> |  <a href="">9</a> | ... | <a href="">25</a>
-            </div>
-        </div>
+            <input class="buttonSubm textIn" type="submit" value="Crear">
+        </form>
     </div>
 </body>
 </html>
