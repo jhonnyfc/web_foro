@@ -1,3 +1,4 @@
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -11,30 +12,34 @@ html {
 	scroll-behavior: smooth;
 }
 
-#contForo{
+#contenedorBuscador {
     margin-top: 50px;
     text-align: center;
+	margin-bottom: 60px;
 }
 
-#contComments {
-	margin-top: 47px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-    margin-bottom: 60px;
+#contenedorBuscador form{
+    margin-top: 20px;
 }
 
-#contComments img{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	height: 151.1px;
-    width: 297.66px;
-	margin-bottom: 40px;
+#contenedorBuscador input.standInput{
+    font-size: 1.1em;
+    border: black;
+    border-style: solid;
+    border-width: 1.5px;
+    margin-top: 30px;
+    height: 45px;
+    width: 200px;
 }
 
-div.coment{
-	display: block;
+#contenedorBuscador input.lupa{
+    height: 45px;
+    width: 45px;
+    font-size: 1.1em;
+}
+
+div.foroResumen {
+    display: block;
 	margin-left: auto;
 	margin-right: auto;
 	width: 650px;
@@ -48,7 +53,7 @@ div.coment{
 	margin-top: 28px;
 }
 
-.coment p{
+div.foroResumen p{
 	margin-top: 5px;
 	margin-left: 10px;
 }
