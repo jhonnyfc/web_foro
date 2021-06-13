@@ -3,6 +3,9 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use Foroupna\Controllers\HomeController;
 use Foroupna\Controllers\ResurceController;
+use Foroupna\Controllers\LoginController;
+use Foroupna\Controllers\RegistrarController;
+use Foroupna\Controllers\BuscadorController;
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
@@ -25,6 +28,18 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 $route->get(basename(__FILE__) . '/', [HomeController::class, 'redirect']);
 $route->get(basename(__FILE__) . '/home', [HomeController::class, 'showHome']);
 /*----------  End of Home Routes  ----------*/
+
+/*----------  Login Routes  ----------*/
+$route->get(basename(__FILE__) . '/login', [LoginController::class, 'showLogin']);
+/*----------  End of Login Routes  ----------*/
+
+/*----------  Registrar Routes  ----------*/
+$route->get(basename(__FILE__) . '/registrar', [RegistrarController::class, 'showRegistrar']);
+/*----------  End of Registrar Routes  ----------*/
+
+/*----------  Buscador Routes  ----------*/
+$route->get(basename(__FILE__) . '/buscador', [BuscadorController::class, 'showBuscador']);
+/*----------  End of Buscador Routes  ----------*/
 
 /*----------  Resurces Routes  ----------*/
 $route->get(basename(__FILE__) .'/res/css/{cssname}',[ResurceController::class,"getCss"]);

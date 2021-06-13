@@ -4,14 +4,13 @@ namespace Foroupna\Controllers;
 
 use Foroupna\Models\Session;
 use Exception;
-use Foroupna\Models\Home;
-use Foroupna\Models\Navigate;
+use Foroupna\Models\Registrar;
 
-class HomeController
+class RegistrarController
 {
     public function __construct()
     {
-        session_start();
+        // session_start();
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -19,17 +18,12 @@ class HomeController
         }
     }
 
-    public function showHome(){
+    public function showRegistrar(){
         try {
-            return Home::makeHome();
+            return Registrar::makeRegistrar();
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();
         }
-    }
-
-    public static function redirect(): void
-    {
-        Navigate::redirect("home");
     }
 }
