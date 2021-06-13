@@ -16,10 +16,10 @@ class Header
                             <li><a href="buscador">Buscar🔍</a></li>
                             <li><a href="login">Login</a></li>';
 
-    public static $lniksLoged = '<li><a href="">Crear</a></li>
-                            <li><a href="">LogOut</a></li>
+    public static $lniksLoged = '<li><a href="makeforo">Crear</a></li>
                             <li><a href="buscador">Buscar🔍</a></li>
-                            <li><a href="">Perfil</a></li>';
+                            <li><a href="perfil">Perfil</a></li>
+                            <li><a onclick="logout()">LogOut</a></li>';
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ class Header
         $header = file_get_contents(dirname(__FILE__)."/templates/header.html");
 
         try{
-            $result = BackendConx::getInstance()->getCall("http://localhost:1234/router.php/user/getUser");
+            $result = BackendConx::getInstance()->getCall("user/getUser");
             $header = str_replace("##LinksNavBar##",self::$lniksLoged,$header);
             // TODO
             // Habra que poner la fncion de cerrar session con los datos del usuario actual

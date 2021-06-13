@@ -36,7 +36,7 @@ class BackendConxController
         
 
         try{
-            $res = BackendConx::getInstance()->postCall("http://localhost:1234/router.php/user/login",$data);
+            $res = BackendConx::getInstance()->postCall("user/login",$data);
             return json_encode($res,true);
         } catch (Exception $e){ 
             http_response_code(400);
@@ -46,7 +46,18 @@ class BackendConxController
 
     public function logOut(){
         try{
-            $res = BackendConx::getInstance()->getCall("http://localhost:1234/router.php/user/logout");
+            $res = BackendConx::getInstance()->getCall("user/logout");
+            session_destroy();
+            return json_encode($res,true);
+        } catch (Exception $e){ 
+            http_response_code(400);
+            return $e->getMessage();
+        }
+    }
+
+    public function checkUser(){
+        try{
+            $res = BackendConx::getInstance()->getCall("user/getUser");
             return json_encode($res,true);
         } catch (Exception $e){ 
             http_response_code(400);

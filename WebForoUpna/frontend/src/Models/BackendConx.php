@@ -40,7 +40,7 @@ class BackendConx
 
     public function postCall($url, $data):array {
         try {
-            $response = $this->client->post($url,[
+            $response = $this->client->post("http://localhost:1234/router.php/".$url,[
                 'json' => $data
             ]);
             $resultado = json_decode($response->getBody(), true);
@@ -55,7 +55,7 @@ class BackendConx
 
     public function getCall($url): array{
         try {
-            $response = $this->client->get($url);
+            $response = $this->client->get("http://localhost:1234/router.php/".$url);
             $resultado = json_decode($response->getBody(), true);
         } catch (ExceptionBadResponseException  $e) {
             $response = $e->getResponse();

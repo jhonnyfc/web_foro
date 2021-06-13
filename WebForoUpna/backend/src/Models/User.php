@@ -6,7 +6,7 @@ use Exception;
 use mysqli_sql_exception;
 
 // Para quitar los reportes de error  o wringis
-error_reporting(0);
+// error_reporting(0);
 
 class User
 {
@@ -16,11 +16,6 @@ class User
 
     public function __construct()
     {
-        // session_start();
-        // if(!isset($_COOKIE["PHPSESSID"]))
-        // {
-        session_start();
-        // }
     }
 
     /**

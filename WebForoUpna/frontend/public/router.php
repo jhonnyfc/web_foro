@@ -7,11 +7,14 @@ use Foroupna\Controllers\LoginController;
 use Foroupna\Controllers\RegistrarController;
 use Foroupna\Controllers\BuscadorController;
 use Foroupna\Controllers\BackendConxController;
+use Foroupna\Controllers\CrearForoController;
+use Foroupna\Controllers\PerfilController;
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
+
 
 // Collector Init
 $route = new RouteCollector();
@@ -19,7 +22,7 @@ $route = new RouteCollector();
 // header('Access-Control-Allow-Origin: http://localhost:8080');
 header('Access-Control-Allow-Origin: *');
 // header('Access-Control-Allow-Credentials: true');
-// header('Access-Control-Max-Age: 20');  
+header('Access-Control-Max-Age: 5');  
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
@@ -42,9 +45,18 @@ $route->get(basename(__FILE__) . '/registrar', [RegistrarController::class, 'sho
 $route->get(basename(__FILE__) . '/buscador', [BuscadorController::class, 'showBuscador']);
 /*----------  End of Buscador Routes  ----------*/
 
+/*----------  Perfil Routes  ----------*/
+$route->get(basename(__FILE__) . '/perfil', [PerfilController::class, 'showPerfil']);
+/*----------  End of Perfil Routes  ----------*/
+
+/*----------  CrearForo Routes  ----------*/
+$route->get(basename(__FILE__) . '/makeforo', [CrearForoController::class, 'showCrearForo']);
+/*----------  End of CrearForo Routes  ----------*/
+
 /*----------  BackenAuth Routes  ----------*/
 $route->post(basename(__FILE__) .'/back/login',[BackendConxController::class,"logIn"]);
 $route->get(basename(__FILE__) .'/back/logOut',[BackendConxController::class,"logOut"]);
+$route->get(basename(__FILE__) .'/back/checkUser',[BackendConxController::class,"checkUser"]);
 /*----------  End of BackenAuth Routes  ----------*/
 
 /*----------  Resurces Routes  ----------*/
@@ -52,7 +64,6 @@ $route->get(basename(__FILE__) .'/res/css/{cssname}',[ResurceController::class,"
 $route->get(basename(__FILE__) .'/res/js/{jsname}',[ResurceController::class,"getJs"]);
 $route->get(basename(__FILE__) .'/res/{fotoName}',[ResurceController::class,"getDefFoto"]);
 /*----------  End of Resurces Routes  ----------*/
-
 
 
 /*==================================

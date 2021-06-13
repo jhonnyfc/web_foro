@@ -2,11 +2,10 @@
 
 namespace Foroupna\Controllers;
 
-use Foroupna\Models\Session;
 use Exception;
-use Foroupna\Models\Login;
+use Foroupna\Models\Perfil;
 
-class LoginController
+class PerfilController
 {
     public function __construct()
     {
@@ -18,18 +17,9 @@ class LoginController
         }
     }
 
-    public function showLogin(){
+    public function showPerfil(){
         try {
-            return Login::makeLogin();
-        } catch (Exception $ex) {
-            http_response_code(400);
-            return $ex->getMessage();
-        }
-    }
-
-    public function login(){
-        try {
-            return Login::makeLogin();
+            return Perfil::makePerfil();
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();

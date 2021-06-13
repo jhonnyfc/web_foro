@@ -2,11 +2,10 @@
 
 namespace Foroupna\Controllers;
 
-use Foroupna\Models\Session;
 use Exception;
-use Foroupna\Models\Login;
+use Foroupna\Models\CrearForo;
 
-class LoginController
+class CrearForoController
 {
     public function __construct()
     {
@@ -18,18 +17,9 @@ class LoginController
         }
     }
 
-    public function showLogin(){
+    public function showCrearForo(){
         try {
-            return Login::makeLogin();
-        } catch (Exception $ex) {
-            http_response_code(400);
-            return $ex->getMessage();
-        }
-    }
-
-    public function login(){
-        try {
-            return Login::makeLogin();
+            return CrearForo::makeCrearForo();
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();

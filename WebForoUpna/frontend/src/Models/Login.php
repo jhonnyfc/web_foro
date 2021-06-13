@@ -25,7 +25,7 @@ class Login
 
     public static function makeLogin():string {
         try{
-            $result = BackendConx::getInstance()->getCall("http://localhost:1234/router.php/user/getUser");
+            $result = BackendConx::getInstance()->getCall("user/getUser");
             // Si el Usuario estaba logueado le llevamos a perfil
             // Donde se le cargaran los datos
             Navigate::redirect("perfil");
