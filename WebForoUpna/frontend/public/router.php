@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . "/../vendor/autoload.php";
 
-use Foroupna\Controllers\UserController;
+use Foroupna\Controllers\HomeController;
+use Foroupna\Controllers\ResurceController;
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
@@ -11,34 +12,24 @@ use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 // Collector Init
 $route = new RouteCollector();
 
-header('Access-Control-Allow-Origin: http://localhost:8080');
-// header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Max-Age: 20');  
+// header('Access-Control-Allow-Origin: http://localhost:8080');
+header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Credentials: true');
+// header('Access-Control-Max-Age: 20');  
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
-$route->get(
-    basename(__FILE__) . "/",
-    function () {
-        return "Root";
-    }
-);
 
-/*----------  User Routes  ----------*/
+/*----------  Home Routes  ----------*/
+$route->get(basename(__FILE__) . '/', [HomeController::class, 'redirect']);
+$route->get(basename(__FILE__) . '/home', [HomeController::class, 'showHome']);
+/*----------  End of Home Routes  ----------*/
 
-$route->post(basename(__FILE__) . '/user/signup', [UserController::class, 'signUp']);
-
-$route->post(basename(__FILE__) . '/user/login', [UserController::class, 'signIn']);
-
-$route->get(basename(__FILE__) . '/user/logout', [UserController::class, 'logout']);
-
-$route->get(basename(__FILE__) . '/user/getUser', [UserController::class, 'getUser']);
-
-$route->get(basename(__FILE__) . '/user/find/{username}', [UserController::class, 'findUser']);
-
-/*----------  End of User Routes  ----------*/
+/*----------  Resurces Routes  ----------*/
+$route->get(basename(__FILE__) .'/res/css/{cssname}',[ResurceController::class,"getCss"]);
+$route->get(basename(__FILE__) .'/res/{fotoName}',[ResurceController::class,"getDefFoto"]);
+/*----------  End of Resurces Routes  ----------*/
 
 
 

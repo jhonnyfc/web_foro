@@ -10,10 +10,7 @@ class UserController
 {
     public function __construct()
     {
-        if(!isset($_COOKIE["PHPSESSID"]))
-        {
-            session_start();
-        }
+        session_start();
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -90,12 +87,11 @@ class UserController
 
     public function findUser(string $username): string {
         $username = Sanitizer::sanitize($username);
+
         try {
             return json_encode(User::find($username), JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
-            http_response_code(400);
-            // return $e->getMessage();
-            return "el usurio no existe";
+            return $e->getMessage();
         }
     }
 

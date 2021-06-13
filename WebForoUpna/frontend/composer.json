@@ -1,0 +1,25 @@
+{
+
+	"name": "wachin/foroupna",
+	"require": {
+		"phroute/phroute": "^2.1",
+		"friendsofphp/php-cs-fixer": "^3.0",
+		"squizlabs/php_codesniffer": "*",
+      "ext-mysqli": "*",
+		"guzzlehttp/guzzle": "^7.0",
+      "ext-json": "*"
+    },
+	"require-dev": {
+		"phpunit/phpunit": "^9.5",
+		"phpstan/phpstan": "^0.12.88",
+		"phpmd/phpmd" : "@stable",
+		"vimeo/psalm": "^4.7"
+	},
+	"autoload": {
+		"psr-4": {
+			"Foroupna\\Models\\":"src/Models",
+			"Foroupna\\Controllers\\":"src/Controllers",
+			"Foroupna\\":"src/"
+		}
+	}
+}

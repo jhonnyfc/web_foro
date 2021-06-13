@@ -5,9 +5,6 @@ namespace Foroupna\Models;
 use Exception;
 use mysqli_sql_exception;
 
-// Para quitar los reportes de error  o wringis
-error_reporting(0);
-
 class User
 {
     public string $foto_url;
@@ -17,10 +14,10 @@ class User
     public function __construct()
     {
         // session_start();
-        // if(!isset($_COOKIE["PHPSESSID"]))
-        // {
-        //     session_start();
-        // }
+        if(!isset($_COOKIE["PHPSESSID"]))
+        {
+        session_start();
+        }
     }
 
     /**
@@ -166,7 +163,7 @@ class User
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($query);
 
-            $stmt->bind_param("s", $username);
+            $stmt->bind_param("i", $username);
 
             $stmt->execute();
 
@@ -187,7 +184,6 @@ class User
             $user->email = $row['email'];
 
             return $user;
-            // return json_encode($user, true);
         } catch (mysqli_sql_exception $ex) {
             throw $ex;
         }
