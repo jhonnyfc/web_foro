@@ -34,4 +34,14 @@ class Resurce
 
         return $fichero;
     }
+
+    public static function findJs($jsname):string {
+        $fichero = file_get_contents(dirname(__FILE__)."/templates/res/js/$jsname");
+        if (!(gettype($fichero) === "string")) {
+            throw new Exception("Fichero no encontrado");
+            // return $result;
+        }
+
+        return $fichero;
+    }
 }

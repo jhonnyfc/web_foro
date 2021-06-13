@@ -19,7 +19,7 @@ class User
         // session_start();
         // if(!isset($_COOKIE["PHPSESSID"]))
         // {
-        //     session_start();
+        session_start();
         // }
     }
 

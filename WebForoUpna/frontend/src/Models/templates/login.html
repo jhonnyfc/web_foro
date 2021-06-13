@@ -1,13 +1,18 @@
 <div id="contLogin">
     <h1>Iniciar Sesion</h1>
-    <form action="">
+    <form >
         <div>
-            <input type="text" maxlength="20" placeholder="Username">
+            <input id="username" type="text" maxlength="20" placeholder="Username" required>
         </div>
         <div>
-            <input type="password" maxlength="20" placeholder="Password">
+            <input id="password" type="password" maxlength="20" placeholder="Password" required>
         </div>
 
-        <input class="buttonSubm" type="submit" value="Login">
+        <!-- <input class="buttonSubm" type="submit" onclick="login()" value="Login"> -->
+        <button class="buttonSubm" type="button" onclick="login()">Login</button>
+
+        <button class="buttonSubm" type="button" onclick="checkUser()">check</button>
+
+        <button class="buttonSubm" type="button" onclick="logout()">logout</button>
     </form>
 </div>

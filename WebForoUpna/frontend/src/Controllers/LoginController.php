@@ -26,4 +26,13 @@ class LoginController
             return $ex->getMessage();
         }
     }
+
+    public function login(){
+        try {
+            return Login::makeLogin();
+        } catch (Exception $ex) {
+            http_response_code(400);
+            return $ex->getMessage();
+        }
+    }
 }

@@ -10,10 +10,10 @@ class UserController
 {
     public function __construct()
     {
-        if(!isset($_COOKIE["PHPSESSID"]))
-        {
-            session_start();
-        }
+        // if(!isset($_COOKIE["PHPSESSID"]))
+        // {
+        session_start();
+        // }
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -84,6 +84,7 @@ class UserController
         try {
             return json_encode(User::find(Session::get('user')), JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
+            http_response_code(400);
             return $e->getMessage();
         }
     }
@@ -106,8 +107,10 @@ class UserController
             Session::forget('user');
             session_destroy();
             //User::redirect("http://localhost:1234/");
-            return "User logged out successfully.";
+            $res = array(0=> "User logged out successfully.");
+            return json_encode($res);
         }
+        http_response_code(400);
         return "User not logged in.";
     }
 

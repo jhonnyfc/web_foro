@@ -11,7 +11,7 @@ use PHPMD\Utility\Strings;
 
 class Buscador
 {
-    private static $linkSheet = "<link rel='stylesheet' href='http://localhost:8080/router.php/res/css/buscador.css'>";
+    private static $linkSheet = "<link rel='stylesheet' href='res/css/buscador.css'>";
 
     public function __construct()
     {

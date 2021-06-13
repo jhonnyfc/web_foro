@@ -11,7 +11,7 @@ use PHPMD\Utility\Strings;
 
 class Registrar
 {
-    private static $linkSheet = "<link rel='stylesheet' href='http://localhost:8080/router.php/res/css/registrar.css'>";
+    private static $linkSheet = "<link rel='stylesheet' href='res/css/registrar.css'>";
 
     public function __construct()
     {

@@ -12,13 +12,13 @@ use PHPMD\Utility\Strings;
 
 class Header
 {
-    public static $lniks = '<li><a href="http://localhost:8080/router.php/registrar">Registar</a></li>
-                            <li><a href="http://localhost:8080/router.php/buscador">Buscar🔍</a></li>
-                            <li><a href="http://localhost:8080/router.php/login">Login</a></li>';
+    public static $lniks = '<li><a href="registrar">Registar</a></li>
+                            <li><a href="buscador">Buscar🔍</a></li>
+                            <li><a href="login">Login</a></li>';
 
     public static $lniksLoged = '<li><a href="">Crear</a></li>
                             <li><a href="">LogOut</a></li>
-                            <li><a href="http://localhost:8080/router.php/buscador">Buscar🔍</a></li>
+                            <li><a href="buscador">Buscar🔍</a></li>
                             <li><a href="">Perfil</a></li>';
 
     public function __construct()
@@ -34,11 +34,12 @@ class Header
         $header = file_get_contents(dirname(__FILE__)."/templates/header.html");
 
         try{
-            $result = BackendConx::getCall("http://localhost:1234/router.php/user/getUser");
-            // Si el Usuario esta logueado
+            $result = BackendConx::getInstance()->getCall("http://localhost:1234/router.php/user/getUser");
             $header = str_replace("##LinksNavBar##",self::$lniksLoged,$header);
+            // TODO
+            // Habra que poner la fncion de cerrar session con los datos del usuario actual
         } catch (Exception $e){
-            // Usuario no logueado
+            // echo $e->getMessage();
             $header = str_replace("##LinksNavBar##",self::$lniks,$header);
         }
 

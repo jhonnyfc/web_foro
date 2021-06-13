@@ -10,7 +10,7 @@ use PHPMD\Utility\Strings;
 
 class Home
 {
-    private static $linkSheet = "<link rel='stylesheet' href='http://localhost:8080/router.php/res/css/home.css'>";
+    private static $linkSheet = "<link rel='stylesheet' href='res/css/home.css'>";
 
     public function __construct()
     {

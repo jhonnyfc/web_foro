@@ -38,4 +38,15 @@ class ResurceController
             return "Fichero no encontrado";
         }
     }
+
+    public function getJs($jsname){
+        $jsname = Sanitizer::sanitize($jsname);
+
+        try {
+            return Resurce::findJs($jsname);
+        } catch (Exception $e){
+            http_response_code(400);
+            return "Fichero no encontrado";
+        }
+    }
 }

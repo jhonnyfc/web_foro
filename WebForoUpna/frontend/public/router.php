@@ -6,6 +6,7 @@ use Foroupna\Controllers\ResurceController;
 use Foroupna\Controllers\LoginController;
 use Foroupna\Controllers\RegistrarController;
 use Foroupna\Controllers\BuscadorController;
+use Foroupna\Controllers\BackendConxController;
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
@@ -41,8 +42,14 @@ $route->get(basename(__FILE__) . '/registrar', [RegistrarController::class, 'sho
 $route->get(basename(__FILE__) . '/buscador', [BuscadorController::class, 'showBuscador']);
 /*----------  End of Buscador Routes  ----------*/
 
+/*----------  BackenAuth Routes  ----------*/
+$route->post(basename(__FILE__) .'/back/login',[BackendConxController::class,"logIn"]);
+$route->get(basename(__FILE__) .'/back/logOut',[BackendConxController::class,"logOut"]);
+/*----------  End of BackenAuth Routes  ----------*/
+
 /*----------  Resurces Routes  ----------*/
 $route->get(basename(__FILE__) .'/res/css/{cssname}',[ResurceController::class,"getCss"]);
+$route->get(basename(__FILE__) .'/res/js/{jsname}',[ResurceController::class,"getJs"]);
 $route->get(basename(__FILE__) .'/res/{fotoName}',[ResurceController::class,"getDefFoto"]);
 /*----------  End of Resurces Routes  ----------*/
 
@@ -58,11 +65,13 @@ $dispatcher = new Dispatcher($route->getData());
 try {
     echo $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
 } catch (HttpRouteNotFoundException $e) {
+    http_response_code(400);
     echo "Error: Ruta no encountered";
-    var_dump($e);
+    // var_dump($e);
 } catch (HttpMethodNotAllowedException $e) {
+    http_response_code(400);
     echo "Error: Ruta encountered pero método no permitido";
-    var_dump($e);
+    // var_dump($e);
 }
 
 /*=====  End of Dispatcher  ======*/
