@@ -37,11 +37,12 @@ class Foro
 
     public static function updateFoto($fotoname){
         try {
+            $pathFoto = "http://localhost:1234/imgs/".$fotoname;
             $query = "UPDATE foro SET foto_url=? WHERE id=?";
 
             $conn = Database::getInstance()->getConnection();
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("ss",$fotoname,$fotoname);
+            $stmt->bind_param("ss",$pathFoto,$fotoname);
 
             $stmt->execute();
             $stmt->close();

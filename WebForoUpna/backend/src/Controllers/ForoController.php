@@ -26,7 +26,6 @@ class ForoController
         
         if (
             empty($_POST['titulo'])
-            || empty($_POST['username'])
             || empty($_POST['descripcion'])
         ) {
             http_response_code(400);
@@ -34,7 +33,9 @@ class ForoController
         }
 
         $titulo = Sanitizer::sanitize($_POST['titulo']);
-        $username = Sanitizer::sanitize($_POST['username']);
+        // TODO
+        // Coger el username de los datos de ssesion
+        $username = Session::get("user");
         $descripcion = Sanitizer::sanitize($_POST['descripcion']);
 
         try {
@@ -46,58 +47,69 @@ class ForoController
         }
     }
 
-    public function uploadFoto(): string{
-        if ( Session::get('user') === null ) {
-            //User::redirect("http://localhost:1234/");
-            http_response_code(400);
-            return "You must login.";
-        }
+    public function uploadFoto(){
+        // if ( Session::get('user') === null ) {
+        //     http_response_code(400);
+        //     return "You must login.";
+        // }
 
         if (
             empty($_POST['fotoname'])
             || empty($_FILES)
         ) {
             http_response_code(400);
-            return 'Bad request error.';
+            return 'Datos vacios';
         }
 
         $fotoname = Sanitizer::sanitize($_POST['fotoname']);
 
         try {
-            $res = Foro::updateFoto($fotoname);
-
-            // TODO
-            // Guardamos la foto en el fichero habra que poner la ruta exta para subir los ficheros
-            $dir = dirname( dirname(__FILE__) );
-            $dir .= '\\frontend\\fotos_ejercicios\\';
+            $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\";
 
             if(!empty($_FILES)){
-                
 
                 $temp_file = $_FILES['file']['tmp_name'];
-                $location = $dir . $_FILES['file']['name'];
+                // $location = $dir . $_FILES['file']['name'];
+                $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-                $nuevo_ancho = 1000;
-                $nuevo_alto = 1000;
+                if (strcmp($ext,"jpg") != 0 && strcmp($ext,"jpeg") != 0){
+                    http_response_code(400);
+                    return "La foto debe de ser jpg o jpeg, el foro se quedara sin foto, si quiere subir foto contacte con el administrador, forUpna@email.com";
+                }
+
+                echo $fotoname.".".$ext." <br> ".$_FILES['file']['name']." <br>";
+
+                $res = Foro::updateFoto($fotoname.".".$ext);
+
+                $location = $dir.$res;
+
+                $nuevo_ancho = 298;
+                $nuevo_alto = 152;
                 header('Content-type: image/jpeg');
                 $thumb = self::mo_resizeImage($temp_file,$nuevo_ancho,$nuevo_alto);
                 // move_uploaded_file($thumb , $location);
                 if (!imagejpeg($thumb , $location)){
-                    header("HTTP/1.0 400 Bad Request");
-                    echo 'Erro camibar redmimensioanar archivo';
+                    http_response_code(400);
+                    return 'Erro camibar redmimensioanar archivo';
                 }
-            } else {
-                header("HTTP/1.0 400 Bad Request");
-                echo 'Erro al subir archivo';
+
+                return json_encode(array(0 => "Foto Subida Bien"),true);
             }
 
-            return json_encode(array(0 => $res),true);
+            http_response_code(400);
+            return 'Erro al subir archivo';
         } catch (Exception $e){
             http_response_code(400);
             return 'Error al crear foro'.$e->getMessage();
         }
+    }
 
-        return "lol";
+    public function cehcDir() {
+        $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\";
+        echo var_dump(scandir($dir))."<br>";
+
+        $target_dir = __DIR__ . "/../../public/imgs/";
+        echo var_dump(scandir($target_dir))."<br>";
     }
 
     public static function mo_resizeImage($temp_file,$nuevo_ancho,$nuevo_alto){

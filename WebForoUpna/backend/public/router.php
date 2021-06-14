@@ -2,6 +2,7 @@
 require __DIR__ . "/../vendor/autoload.php";
 
 use Foroupna\Controllers\UserController;
+use Foroupna\Controllers\ForoController;
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
@@ -36,8 +37,8 @@ $route->get(basename(__FILE__) . '/user/find/{username}', [UserController::class
 /*----------  End of User Routes  ----------*/
 
 /*----------  Foro Routes  ----------*/
-$route->post(basename(__FILE__) . '/foro/crear', [UserController::class, 'createForo']);
-$route->post(basename(__FILE__) . '/foro/upfoto', [UserController::class, 'upfoto']);
+$route->post(basename(__FILE__) . '/foro/crear', [ForoController::class, 'createForo']);
+$route->post(basename(__FILE__) . '/foro/upfoto', [ForoController::class, 'uploadFoto']);
 /*----------  End of Foro Routes  ----------*/
 
 

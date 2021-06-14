@@ -1,14 +1,14 @@
 <div id="contRegistrar">
     <h1>Registar</h1>
-    <form action="">
+    <form id="fromRegistrar" onsubmit="registrar();return false">
         <div>
-            <input type="text" maxlength="20" placeholder="Username">
+            <input id="username" name="username" type="text" maxlength="20" placeholder="Username" required>
         </div>
         <div>
-            <input type="password" maxlength="20" placeholder="Password">
+            <input id="password" type="password" maxlength="20" placeholder="Password" required>
         </div>
         <div>
-            <input type="email" maxlength="30" placeholder="Email">
+            <input id="email" name="email" type="email" maxlength="30" placeholder="Email" required>
         </div>
         <input class="buttonSubm" type="submit" value="Registrar">
     </form>

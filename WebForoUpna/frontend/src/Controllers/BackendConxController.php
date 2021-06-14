@@ -64,4 +64,59 @@ class BackendConxController
             return $e->getMessage();
         }
     }
+
+    public function upData(){
+        if (
+            empty($_POST['titulo'])
+            || empty($_POST['descripcion'])
+        ) {
+            http_response_code(400);
+            return 'Campos Vacios';
+        }
+
+        $titulo = Sanitizer::sanitize($_POST['titulo']);
+        $descripcion = Sanitizer::sanitize($_POST['descripcion']);
+
+        $data = array(
+            "titulo" => $titulo,
+            "descripcion" => $descripcion
+        );
+
+        try {
+            $res = BackendConx::getInstance()->postCall("foro/crear",$data);
+            return json_encode($res,true);
+        } catch (Exception $ex) {
+            http_response_code(400);
+            return $ex->getMessage();
+        }
+    }
+
+    public function registar(){
+        if (
+            empty($_POST['username'])
+            || empty($_POST['password'])
+            || empty($_POST['email'])
+        ) {
+            http_response_code(400);
+            return 'Bad request error.';
+        }
+
+        $username = Sanitizer::sanitize($_POST['username']);
+        $password = Sanitizer::sanitize($_POST['password']);
+        $email = Sanitizer::sanitize($_POST['email']);
+
+        $data = array(
+            "username" => $username,
+            "password" => $password,
+            "email" => $email
+        );
+
+        try {
+            $res = BackendConx::getInstance()->postCall("user/signup",$data);
+            return json_encode($res,true);
+        } catch (Exception $ex) {
+            http_response_code(400);
+            return $ex->getMessage();
+        }
+    }
 }

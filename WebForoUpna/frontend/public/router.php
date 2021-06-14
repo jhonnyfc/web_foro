@@ -57,6 +57,8 @@ $route->get(basename(__FILE__) . '/makeforo', [CrearForoController::class, 'show
 $route->post(basename(__FILE__) .'/back/login',[BackendConxController::class,"logIn"]);
 $route->get(basename(__FILE__) .'/back/logOut',[BackendConxController::class,"logOut"]);
 $route->get(basename(__FILE__) .'/back/checkUser',[BackendConxController::class,"checkUser"]);
+$route->post(basename(__FILE__) . '/back/makeforo', [BackendConxController::class, "upData"]);
+$route->post(basename(__FILE__) . '/back/registrar', [BackendConxController::class, "registar"]);
 /*----------  End of BackenAuth Routes  ----------*/
 
 /*----------  Resurces Routes  ----------*/

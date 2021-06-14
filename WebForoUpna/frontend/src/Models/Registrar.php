@@ -12,6 +12,7 @@ use PHPMD\Utility\Strings;
 class Registrar
 {
     private static $linkSheet = "<link rel='stylesheet' href='res/css/registrar.css'>";
+    private static $linkScript = "<script src='res/js/registrar.js'></script>";
 
     public function __construct()
     {
@@ -24,7 +25,8 @@ class Registrar
 
     public static function makeRegistrar():string {
         $html = Header::makeHeader(); 
-        $html = str_replace("##MdasLinksCss##",self::$linkSheet,$html);
+        $librerias = self::$linkSheet.self::$linkScript;
+        $html = str_replace("##MdasLinksCss##",$librerias,$html);
 
         $login = file_get_contents(dirname(__FILE__)."/templates/registrar.html");
         $html = str_replace("##body##",$login,$html);

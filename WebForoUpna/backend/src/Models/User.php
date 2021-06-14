@@ -89,7 +89,7 @@ class User
 
             $stmt->close();
 
-            return "User registered successfully";
+            return $username;
         } catch (mysqli_sql_exception $ex) {
             throw $ex;
         }

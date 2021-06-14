@@ -41,13 +41,13 @@ class UserController
         try {
             $this->validateInputData($username, $email, $password);
 
-            User::signUp(
+            $usernameok = User::signUp(
                 $username,
                 $email,
                 $password
             );
 
-            return 'Success';
+            return json_encode(array("username"=>$usernameok),true);
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();
