@@ -12,14 +12,13 @@ class Perfil
     private static $linkSheet = "<link rel='stylesheet' href='res/css/perfil.css'>";
     public function __construct()
     {
-
     }
 
     public static function makePerfil(){
         try{
             $user = BackendConx::getInstance()->getCall("user/getUser");
 
-            $html = Header::makeHeader();
+            $html = Header::makeHeader("");
 
             $librerias = self::$linkSheet;
             $html = str_replace("##MdasLinksCss##",$librerias,$html);

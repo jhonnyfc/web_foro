@@ -33,8 +33,6 @@ class ForoController
         }
 
         $titulo = Sanitizer::sanitize($_POST['titulo']);
-        // TODO
-        // Coger el username de los datos de ssesion
         $username = Session::get("user");
         $descripcion = Sanitizer::sanitize($_POST['descripcion']);
 
@@ -48,11 +46,6 @@ class ForoController
     }
 
     public function uploadFoto(){
-        // if ( Session::get('user') === null ) {
-        //     http_response_code(400);
-        //     return "You must login.";
-        // }
-
         if (
             empty($_POST['fotoname'])
             || empty($_FILES)
@@ -123,5 +116,108 @@ class ForoController
         imagecopyresized($thumb, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho, $alto);
 
         return $thumb;
+    }
+
+    public function getMostComment($number){        
+        if ($number <= 0){
+            http_response_code(400);
+            return 'Erro en el numero de foros solicitado';
+        }
+
+        $number = Sanitizer::sanitize($number);
+
+        try {
+            $res = Foro::getMostComment($number);
+            return json_encode($res,true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear foro'.$e->getMessage();
+        }
+    }
+
+    public function insertComment(){
+        if ( Session::get('user') === null ) {
+            http_response_code(400);
+            return "You must login.";
+        }
+
+        if (
+            empty($_POST['comentario'])
+            || empty($_POST['id_foro'])
+        ) {
+            http_response_code(400);
+            return 'Datos vacios';
+        }
+
+        $comentario = Sanitizer::sanitize($_POST['comentario']);
+        $id_foro = Sanitizer::sanitize($_POST['id_foro']);
+        $username = Session::get('user');
+
+        try {
+            $res = Foro::insertComment($comentario,$id_foro,$username);
+            return json_encode(array(0 => $res),true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear foro'.$e->getMessage();
+        }
+    }
+
+    public function buscaForo(){
+        if (
+            empty($_POST['titulo'])
+        ) {
+            http_response_code(400);
+            return 'Datos vacios';
+        }
+
+        $titulo = Sanitizer::sanitize($_POST['titulo']);
+
+        try {
+            $res = Foro::buscaForo($titulo);
+            return json_encode($res,true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear foro'.$e->getMessage();
+        }
+    }
+
+    public function getLastNcomment($number){
+        if ($number <= 0){
+            http_response_code(400);
+            return 'Erro en el numero de foros solicitado';
+        }
+
+        $number = Sanitizer::sanitize($number);
+
+        try {
+            $res = Foro::getLastNcomment($number);
+            // if ($res === ""){
+            //     http_response_code(400);
+            //     return 'No har comments';
+            // } 
+
+            return json_encode($res,true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear foro'.$e->getMessage();
+        }
+    }
+
+    public function getForobyId($id_foro){
+        if ($id_foro <= 0){
+            http_response_code(400);
+            return 'Erroren el id del foro';
+        }
+
+        $id_foro = Sanitizer::sanitize($id_foro);
+
+        try {
+            $res = Foro::findForo($id_foro);
+
+            return json_encode($res,true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear foro'.$e->getMessage();
+        }
     }
 }

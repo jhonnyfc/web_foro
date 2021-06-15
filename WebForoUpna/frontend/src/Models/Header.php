@@ -12,36 +12,31 @@ use PHPMD\Utility\Strings;
 
 class Header
 {
-    public static $lniks = '<li><a href="registrar">Registar</a></li>
-                            <li><a href="buscador">Buscar🔍</a></li>
-                            <li><a href="login">Login</a></li>';
+    public static $lniksNL = '<li><a href="##sp##registrar">Registar</a></li>
+                            <li><a href="##sp##buscador">Buscar🔍</a></li>
+                            <li><a href="##sp##login">Login</a></li>';
 
-    public static $lniksLoged = '<li><a href="makeforo">Crear</a></li>
-                            <li><a href="buscador">Buscar🔍</a></li>
-                            <li><a href="perfil">Perfil</a></li>
-                            <li><a onclick="logout()">LogOut</a></li>';
+    public static $lniksLoged = "<li><a href='##sp##makeforo'>Crear</a></li>
+                            <li><a href='##sp##buscador'>Buscar🔍</a></li>
+                            <li><a href='##sp##perfil'>Perfil</a></li>
+                            <li><a onclick=".'logout("##sp##")'.">LogOut</a></li>";
 
     public function __construct()
     {
-        // session_start();
-        if(!isset($_COOKIE["PHPSESSID"]))
-        {
-        session_start();
-        }
     }
 
-    public static function makeHeader():string {
+    public static function makeHeader($nav):string {
         $header = file_get_contents(dirname(__FILE__)."/templates/header.html");
 
         try{
             $result = BackendConx::getInstance()->getCall("user/getUser");
-            $header = str_replace("##LinksNavBar##",self::$lniksLoged,$header);
-            // TODO
-            // Habra que poner la fncion de cerrar session con los datos del usuario actual
+            $links = self::$lniksLoged;
         } catch (Exception $e){
             // echo $e->getMessage();
-            $header = str_replace("##LinksNavBar##",self::$lniks,$header);
+            $links = self::$lniksNL;
         }
+        $header = str_replace("##LinksNavBar##",$links,$header);
+        $header = str_replace("##sp##",$nav,$header);
 
         return  $header;
     }

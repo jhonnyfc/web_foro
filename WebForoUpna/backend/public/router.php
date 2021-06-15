@@ -39,6 +39,11 @@ $route->get(basename(__FILE__) . '/user/find/{username}', [UserController::class
 /*----------  Foro Routes  ----------*/
 $route->post(basename(__FILE__) . '/foro/crear', [ForoController::class, 'createForo']);
 $route->post(basename(__FILE__) . '/foro/upfoto', [ForoController::class, 'uploadFoto']);
+$route->get(basename(__FILE__) . '/foro/getmostcommet/{number}', [ForoController::class, 'getMostComment']);
+$route->post(basename(__FILE__) . '/foro/insertcom', [ForoController::class, 'insertComment']);
+$route->post(basename(__FILE__) . '/foro/buscador', [ForoController::class, 'buscaForo']);
+$route->get(basename(__FILE__) . '/foro/getlastncomment/{number}', [ForoController::class, 'getLastNcomment']);
+$route->get(basename(__FILE__) . '/foro/getforobyid/{id_foro}', [ForoController::class, 'getForobyId']);
 /*----------  End of Foro Routes  ----------*/
 
 

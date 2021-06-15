@@ -23,7 +23,7 @@ class Buscador
     }
 
     public static function makeBuscador():string {
-        $html = Header::makeHeader(); 
+        $html = Header::makeHeader(""); 
         $html = str_replace("##MdasLinksCss##",self::$linkSheet,$html);
 
         $login = file_get_contents(dirname(__FILE__)."/templates/buscador.html");

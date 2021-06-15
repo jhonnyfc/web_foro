@@ -8,6 +8,7 @@ use Foroupna\Controllers\RegistrarController;
 use Foroupna\Controllers\BuscadorController;
 use Foroupna\Controllers\BackendConxController;
 use Foroupna\Controllers\CrearForoController;
+use Foroupna\Controllers\ForoController;
 use Foroupna\Controllers\PerfilController;
 
 use Phroute\Phroute\RouteCollector;
@@ -53,12 +54,17 @@ $route->get(basename(__FILE__) . '/perfil', [PerfilController::class, 'showPerfi
 $route->get(basename(__FILE__) . '/makeforo', [CrearForoController::class, 'showCrearForo']);
 /*----------  End of CrearForo Routes  ----------*/
 
+/*----------  Foro Routes  ----------*/
+$route->get(basename(__FILE__) . '/foro/{id_foro}', [ForoController::class, 'showForo']);
+/*----------  End of Foro Routes  ----------*/
+
 /*----------  BackenAuth Routes  ----------*/
 $route->post(basename(__FILE__) .'/back/login',[BackendConxController::class,"logIn"]);
 $route->get(basename(__FILE__) .'/back/logOut',[BackendConxController::class,"logOut"]);
 $route->get(basename(__FILE__) .'/back/checkUser',[BackendConxController::class,"checkUser"]);
 $route->post(basename(__FILE__) . '/back/makeforo', [BackendConxController::class, "upData"]);
 $route->post(basename(__FILE__) . '/back/registrar', [BackendConxController::class, "registar"]);
+$route->post(basename(__FILE__) . '/back/comentar', [BackendConxController::class, "comentar"]);
 /*----------  End of BackenAuth Routes  ----------*/
 
 /*----------  Resurces Routes  ----------*/

@@ -16,11 +16,6 @@ class Login
 
     public function __construct()
     {
-        // session_start();
-        if(!isset($_COOKIE["PHPSESSID"]))
-        {
-            session_start();
-        }
     }
 
     public static function makeLogin():string {
@@ -30,7 +25,7 @@ class Login
             // Donde se le cargaran los datos
             Navigate::redirect("perfil");
         } catch (Exception $e){
-            $html = Header::makeHeader();
+            $html = Header::makeHeader("");
 
             $librerias = self::$linkSheet.self::$linkScript;
             $html = str_replace("##MdasLinksCss##",$librerias,$html);

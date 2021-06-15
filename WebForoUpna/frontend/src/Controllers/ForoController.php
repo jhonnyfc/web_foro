@@ -5,10 +5,10 @@ namespace Foroupna\Controllers;
 use Foroupna\Models\Session;
 use Foroupna\Models\BackendConx;
 use Exception;
-use Foroupna\Models\Home;
+use Foroupna\Models\Foro;
 use Foroupna\Models\Navigate;
 
-class HomeController
+class ForoController
 {
     public function __construct()
     {
@@ -20,21 +20,22 @@ class HomeController
         }
     }
 
-    public function showHome(){
+    public function showForo($id_foro){
+        if ($id_foro <= 0){
+            http_response_code(400);
+            return 'Erroren el id del foro';
+        }
+
+        $id_foro = Sanitizer::sanitize($id_foro);
+
         try {
-            $number = 3;
-            $foros = BackendConx::getInstance()->getCall("foro/getmostcommet/".$number);
-            $comments = BackendConx::getInstance()->getCall("foro/getlastncomment/".$number);
+            $forodata = BackendConx::getInstance()->getCall("foro/getforobyid/".$id_foro);
+            // $comments = BackendConx::getInstance()->getCall("foro/getlastncomment/".$number);
             // $comments = "";//BackendConx::getInstance()->getCall("foro/getlastncomment/".$number);
-            return Home::makeHome($foros,$comments);
+            return Foro::makeForo($forodata);
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();
         }
-    }
-
-    public static function redirect(): void
-    {
-        Navigate::redirect("home");
     }
 }

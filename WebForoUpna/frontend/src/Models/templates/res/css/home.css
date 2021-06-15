@@ -17,11 +17,12 @@ html {
 }
 
 #top3foro{
-    margin-top: 50px;
+    margin-top: 35px;
     text-align: center;
 }
 
 .foroTop{
+    margin-top: 15px;
     position: relative;
     height: 137.3px;
     width: 270.6px;
@@ -30,9 +31,16 @@ html {
     margin-right: 35px;
 }
 
+.foroTop:hover{
+    transform: scale(1.05);
+}
+
 .foroTop img{
     height: 137.3px;
     width: 270.6px;
+    border:rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 2px;
 }
 
 .foroTop h2{
@@ -68,38 +76,37 @@ html {
     display: block;
 	margin-left: auto;
 	margin-right: auto;
-    height: 137.3px;
-    width: 750px;
+    /* height: 137.3px;
+    width: 750px; */
     margin-top: 30px;
     border:rgb(0, 0, 0);
     border-style: solid;
     border-width: 2px;
     font-size: 1em;
-    position: relative;
+    padding: 10px;
+}
+
+.comment:hover{
+    transform: scale(1.05);
 }
 
 h3.userName{
-    position: absolute;
-    top: 15%;
-    left: 8%;
-    transform: translate(-50%, -50%);
-}
-
-h3.foroTitle{
-    position: absolute;
-    top: 15%;
-    right: 15%;
-    transform: translate(-50%, -50%);
+    margin-top: 5px;
 }
 
 p.fistWords{
-    height: 90px;
-    width: 650px;
+    margin-top: 5px;
 }
 
-p.fistWords{
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+@media only screen and (min-width: 815.001px) {
+    .comment{
+        height: 137.3px;
+        width: 750px;
+    }
+}
+
+@media only screen and (max-width: 815px){
+    .comment{
+        width: 85%;
+    }
 }

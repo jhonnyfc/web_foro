@@ -119,4 +119,30 @@ class BackendConxController
             return $ex->getMessage();
         }
     }
+
+    public function comentar(){
+        if (
+            empty($_POST['comentario'])
+            || empty($_POST['id_foro'])
+        ) {
+            http_response_code(400);
+            return 'Bad request error.';
+        }
+
+        $comentario = Sanitizer::sanitize($_POST['comentario']);
+        $id_foro = Sanitizer::sanitize($_POST['id_foro']);
+
+        $data = array(
+            "comentario" => $comentario,
+            "id_foro" => $id_foro
+        );
+
+        try {
+            $res = BackendConx::getInstance()->postCall("foro/insertcom",$data);
+            return json_encode($res,true);
+        } catch (Exception $ex) {
+            http_response_code(400);
+            return $ex->getMessage();
+        }
+    }
 }

@@ -24,7 +24,7 @@ class Registrar
     }
 
     public static function makeRegistrar():string {
-        $html = Header::makeHeader(); 
+        $html = Header::makeHeader(""); 
         $librerias = self::$linkSheet.self::$linkScript;
         $html = str_replace("##MdasLinksCss##",$librerias,$html);
 

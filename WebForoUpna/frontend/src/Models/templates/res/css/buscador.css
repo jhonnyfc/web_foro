@@ -42,7 +42,6 @@ div.foroResumen {
     display: block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 650px;
 	border-width: 2px;
 	border:rgb(0, 0, 0);
     border-style: solid;
@@ -58,7 +57,23 @@ div.foroResumen p{
 	margin-left: 10px;
 }
 
+.foroResumen:hover{
+	transform: scale(1.05);
+}
+
 .paginado{
 	font-size: 1.2em;
 	margin-top: 25px;
+}
+
+@media only screen and (min-width: 815.001px){
+	div.foroResumen {
+		width: 750px;
+	}
+}
+
+@media only screen and (max-width: 815px){
+	div.foroResumen {
+		width: 85%;
+	}
 }

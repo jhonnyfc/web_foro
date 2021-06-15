@@ -16,7 +16,7 @@ class CrearForo
 
     public static function makeCrearForo(){
         try{
-            $html = Header::makeHeader();
+            $html = Header::makeHeader("");
 
             $librerias = self::$linkSheet.self::$linkScript;
             $html = str_replace("##MdasLinksCss##",$librerias,$html);
