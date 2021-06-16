@@ -220,4 +220,34 @@ class ForoController
             return 'Error al crear foro'.$e->getMessage();
         }
     }
+
+    public function getCommentsByForoId(){
+        if (
+            empty($_POST['id_foro'])
+            || empty($_POST['numRowXPag'])
+            || empty($_POST['pagina'])
+        ) {
+            http_response_code(400);
+            return 'Datos vacios';
+        }
+
+        $numRowXPag = Sanitizer::sanitize($_POST['numRowXPag']);
+        $id_foro = Sanitizer::sanitize($_POST['id_foro']);
+        $pagina = Sanitizer::sanitize($_POST['pagina']);
+
+        try {
+            $numTotalRows = Foro::countNumRowsCommentForo($id_foro);
+            $res = Foro::getCommentsByForoId($id_foro,$numRowXPag,$pagina);
+
+            $data = array(
+                0 => $numTotalRows,
+                1 => $res
+            );
+
+            return json_encode($data,true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear foro'.$e->getMessage();
+        }
+    }
 }

@@ -44,6 +44,7 @@ $route->post(basename(__FILE__) . '/foro/insertcom', [ForoController::class, 'in
 $route->post(basename(__FILE__) . '/foro/buscador', [ForoController::class, 'buscaForo']);
 $route->get(basename(__FILE__) . '/foro/getlastncomment/{number}', [ForoController::class, 'getLastNcomment']);
 $route->get(basename(__FILE__) . '/foro/getforobyid/{id_foro}', [ForoController::class, 'getForobyId']);
+$route->post(basename(__FILE__) . '/foro/getcommentbyforo', [ForoController::class, 'getCommentsByForoId']);
 /*----------  End of Foro Routes  ----------*/
 
 

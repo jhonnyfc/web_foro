@@ -56,6 +56,7 @@ $route->get(basename(__FILE__) . '/makeforo', [CrearForoController::class, 'show
 
 /*----------  Foro Routes  ----------*/
 $route->get(basename(__FILE__) . '/foro/{id_foro}', [ForoController::class, 'showForo']);
+$route->post(basename(__FILE__) . '/foro/loadComments', [ForoController::class, 'loadComments']);
 /*----------  End of Foro Routes  ----------*/
 
 /*----------  BackenAuth Routes  ----------*/

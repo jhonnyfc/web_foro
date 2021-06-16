@@ -53,11 +53,17 @@ SELECT count(f.id_foro) as num_filas
 FROM foro f
 WHERE f.titulo LIKE '%?%';
 
+-- TODO
+-- get commets
+SELECT *
+FROM comment c
+ORDER BY c.idcom DESC LIMIT 0,2;
+
 
 if ($pagina == 1) {
-    $consulta .= " LIMIT $numFilas";
+    $consulta .= " LIMIT $numFilasxpag";
 } else {
-    $consulta .= " LIMIT ". (($pagina - 1) *  $numFilas ) . ", " . ($numFilas);
+    $consulta .= " LIMIT ". (($pagina - 1) *  $numFilasxpag ) . ", " . ($numFilasxpag);
 }
 
 -- https://github.com/jhonnyfc/Calisthenics_Web_SIW/blob/4737ce0d739a6bd7489c3b0b0998c79146875ea3/final/backoffice/back__modelo.php#L687

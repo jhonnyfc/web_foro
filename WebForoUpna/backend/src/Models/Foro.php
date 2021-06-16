@@ -175,15 +175,45 @@ class Foro
         }
     }
 
-    public static function countNumRowsCommentForo($titulo):Integer{
+    public static function getCommentsByForoId($id_foro,$numRowXPag,$pagina){
         try {
-            $query = "SELECT count(f.id_foro) as num_filas
-                    FROM foro f
-                    WHERE f.titulo LIKE '%?%'";
+            $query = "SELECT *
+                    FROM comment c
+                    WHERE c.id_foro = ?
+                    ORDER BY c.idcom ASC LIMIT ?,?";
+
+            $ini = (($pagina - 1) *  $numRowXPag );
+            $end = ($numRowXPag);
 
             $conn = Database::getInstance()->getConnection();
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("s",$titulo);
+            $stmt->bind_param("sss",$id_foro,$ini,$end);
+
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $stmt->close();
+
+            $data = array();
+            while ($row = $res->fetch_assoc()) {
+                $data[] = $row;
+            }
+
+            return $data;
+        } catch (mysqli_sql_exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public static function countNumRowsCommentForo($id_foro){
+        try {
+            $query = "SELECT count(c.idcom) as num_filas
+                    FROM comment c
+                    WHERE c.id_foro = ?
+                    GROUP BY c.id_foro";
+
+            $conn = Database::getInstance()->getConnection();
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s",$id_foro);
 
             $stmt->execute();
             $res = $stmt->get_result();
