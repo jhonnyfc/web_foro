@@ -1,44 +1,13 @@
 stages:
-    - build
-    - test
     - deploy
-
-build_a:
-    tags:
-        - guacamole
-    stage: build
-    script:
-        - echo "This job builds something."
-        - sleep 5
-build_b:
-    tags:
-        - guacamole
-    stage: build
-    script:
-        - echo "This job builds algo mas de b"
-
-test_a:
-    tags:
-        - guacamole
-    stage: test
-    script:
-        - echo "This job builds something."
-        - sleep 5
-
-test_b:
-    tags:
-        - guacamole
-    stage: test
-    script:
-        - echo "This job builds something."
-        - sleep 5
 
 deploy_a:
     tags:
         - guacamole
     stage: deploy
     script:
-        - echo "This job builds something."
+        - echo "Copiamos backend a la crpeta html"
+        - cp -r WebForoUpna/backend/ /var/www/html/
         - sleep 5
 
 deploy_b:
@@ -46,5 +15,6 @@ deploy_b:
         - guacamole
     stage: deploy
     script:
-        - echo "This job builds something."
+        - echo "Copiamo frontend a la carpeta html"
+        - cp -r WebForoUpna/frontend/ /var/www/html/
         - sleep 5
