@@ -15,7 +15,6 @@ deploy_b:
         - guacamole
     stage: deploy
     script:
-        - whoami
         - echo "Copiamo frontend a la carpeta html"
         - echo "$RootPass" | sudo -S cp -r WebForoUpna/frontend/ /var/www/html/
         - sleep 5
