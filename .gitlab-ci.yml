@@ -7,8 +7,6 @@ deploy_a:
     stage: deploy
     script:
         - echo "Copiamos backend a la crpeta html"
-        - echo "$RootPass"
-        - echo $RootPass
         - echo "$RootPass" | sudo -S cp -r WebForoUpna/backend/ /var/www/html/
         - sleep 5
 
