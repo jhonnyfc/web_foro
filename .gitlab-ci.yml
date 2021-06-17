@@ -7,7 +7,7 @@ deploy_a:
     stage: deploy
     script:
         - echo "Copiamos backend a la crpeta html"
-        - echo "$RootPass" | sudo cp -r WebForoUpna/backend/ /var/www/html/
+        - echo $RootPass | sudo cp -r WebForoUpna/backend/ /var/www/html/
         - sleep 5
 
 deploy_b:
@@ -16,5 +16,5 @@ deploy_b:
     stage: deploy
     script:
         - echo "Copiamo frontend a la carpeta html"
-        - echo "$RootPass" | sudo cp -r WebForoUpna/frontend/ /var/www/html/
+        - echo $RootPass | sudo cp -r WebForoUpna/frontend/ /var/www/html/
         - sleep 5
