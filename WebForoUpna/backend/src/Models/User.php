@@ -188,16 +188,6 @@ class User
         }
     }
 
-    public static function redirect(string $url): void
-    {
-        header("Location: $url");
-    }
-
-    public function sayHello(): void
-    {
-        echo "Hello";
-    }
-
     public static function updateFoto($fotoname,$username){
         try {
             $pathFoto = "http://localhost:1234/imgs/perfil/".$fotoname;

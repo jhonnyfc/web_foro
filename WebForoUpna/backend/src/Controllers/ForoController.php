@@ -6,6 +6,7 @@ use Foroupna\Models\Session;
 use Exception;
 use Foroupna\Controllers\FileController;
 use Foroupna\Models\Foro;
+use Foroupna\Models\Comment;
 
 class ForoController
 {
@@ -113,7 +114,7 @@ class ForoController
         $username = Session::get('user');
 
         try {
-            $res = Foro::insertComment($comentario,$id_foro,$username);
+            $res = Comment::insertComment($comentario,$id_foro,$username);
             return json_encode(array(0 => $res),true);
         } catch (Exception $e){
             http_response_code(400);
@@ -160,7 +161,7 @@ class ForoController
         $number = Sanitizer::sanitize($number);
 
         try {
-            $res = Foro::getLastNcomment($number);
+            $res = Comment::getLastNcomment($number);
             // if ($res === ""){
             //     http_response_code(400);
             //     return 'No har comments';

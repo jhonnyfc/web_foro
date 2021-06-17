@@ -9,7 +9,7 @@ use Foroupna\Models\Session;
 
 class FileController
 {
-    public static function uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,$isPerfil){
+    public static function uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,$isPerfil) {
         $temp_file = $_FILES['file']['tmp_name'];
         // $location = $dir . $_FILES['file']['name'];
         $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
