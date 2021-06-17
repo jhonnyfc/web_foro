@@ -1,16 +1,19 @@
 <div id="contenedorBuscador">
     <h1> Buscador</h1>
-    <form onsubmit="busca(); return false">
-        <input class="lupa" type="submit" value="🔍">
-        <input id="titulo" name="titulo" class="standInput" type="text" maxlength="25" required>
+    <form onsubmit="busca(); return false" role="search">
+        <div>
+            <label hidden for="titulo">titulo por el que buscar</label>
+            <input aria-required="true" id="titulo" name="titulo" class="standInput" type="text" maxlength="25" required>
+            <input class="lupa" type="submit" value="🔍">
+        </div>
     </form>
 
     <br><br><br>
     <div id="forosEncontrados">
-        <div id="resultadosBusqueda">
+        <div id="resultadosBusqueda" aria-describedby="resualtados de busqueda">
             ##resulatados##
         </div>
-        <div class="paginado">
+        <div class="paginado" aria-describedby="barra de paginado de los reultados de busqueda">
             <ul id="pagindoID">##paginado##</ul>
         </div>
     </div>

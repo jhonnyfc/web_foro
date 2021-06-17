@@ -1,10 +1,10 @@
 <div id="contForo">
-    <h1>###id_foro##</h1>
-    <h1>##TituloForo##</h1>
+    <h1 aria-describedby="id del foro">###id_foro##</h1>
+    <h1 aria-describedby="titulo del foro">##TituloForo##</h1>
     <div id="contComments">
-        <img id="fotForo" src="##urlfor##" alt="##altfotoforo##">
+        <img loading="lazy" id="fotForo" src="##urlfor##" alt="foto del foro: ##TituloForo##">
 
-        <div class="coment">
+        <div class="coment" aria-describedby="descripcion de hilo del foro">
             <div>
                 <h3>##username##</h3>
             </div>
@@ -14,11 +14,12 @@
         </div>
 
         <br>
-        <div id="commentCont">
+        <div id="commentCont" aria-describedby="contenedor de formulario para creacion de comentario">
             <h3>Comentar</h3>
-            <form id="formComment" onsubmit="comentarFun();return false">
+            <form role="form" id="formComment" onsubmit="comentarFun();return false">
                 <div>
-                    <textarea name="comentario" id="comentario" rows="16" cols="100" maxlength="1200"
+                    <label for="comentario" hidden>area para ecribir comentario</label>
+                    <textarea aria-required="true" name="comentario" id="comentario" rows="16" cols="100" maxlength="1200"
                         required></textarea>
                 </div>
                 <div>
@@ -29,7 +30,7 @@
         </div>
         <br>
 
-        <div id="contCommentsId">##comentarios##</div>
+        <div id="contCommentsId" aria-describedby="contendor con los comentarios del foro">##comentarios##</div>
 
         <br>
         <div class="paginado">

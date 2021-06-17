@@ -1,11 +1,13 @@
 <div id="contLogin">
     <h1>Iniciar Sesion</h1>
-    <form onsubmit="login();return false">
+    <form onsubmit="login();return false" role="form" aria-describedby="formulario de login">
         <div>
-            <input id="username" type="text" maxlength="20" placeholder="Username" required>
+            <label for="username" hidden>nombre de usuario</label>
+            <input aria-required="true" id="username" type="text" maxlength="20" placeholder="Username" required>
         </div>
         <div>
-            <input id="password" type="password" maxlength="20" placeholder="Password" required>
+            <label for="password" hidden>contraseña</label>
+            <input aria-required="true" id="password" type="password" maxlength="20" placeholder="Password" required>
         </div>
 
         <input class="buttonSubm" type="submit"  value="Login">

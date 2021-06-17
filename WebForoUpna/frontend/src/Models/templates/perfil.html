@@ -1,12 +1,14 @@
 <div id="contPerfil">
     <h1>Perfil</h1>
-    <img loading="lazy" class="circuloFoto" src="##foto##" alt="foto de perfil">
-    <form action="perfil/editar">
+    <img loading="lazy" class="circuloFoto" src="##foto##" alt="foto de perfil de ##username##">
+    <form action="perfil/editar" role="form" aria-describedby="formualrio con los datos del usuario">
         <div>
-            <input class="textIn" type="text" maxlength="20" placeholder="Username" value="##username##" disabled>
+            <label for="username" hidden> nombre de usuario</label>
+            <input name="username" class="textIn" type="text" maxlength="20" placeholder="Username" value="##username##" disabled>
         </div>
         <div>
-            <input class="textIn" type="email" maxlength="20" placeholder="Email" value="##email##" disabled>
+            <label for="email" hidden>correo electronico</label>
+            <input name="email" class="textIn" type="email" maxlength="20" placeholder="Email" value="##email##" disabled>
         </div>
 
         <input class="buttonSubm textIn" type="submit" value="Editar">

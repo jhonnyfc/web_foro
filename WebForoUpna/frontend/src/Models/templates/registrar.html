@@ -1,14 +1,17 @@
 <div id="contRegistrar">
     <h1>Registar</h1>
-    <form id="fromRegistrar" onsubmit="registrar();return false">
+    <form aria-describedby="formualrio con los datos para actualizar los datos del usuario" id="fromRegistrar" onsubmit="registrar();return false" role="form">
         <div>
-            <input id="username" name="username" type="text" maxlength="20" placeholder="Username" required>
+            <label for="username" hidden>nombre de usuario</label>
+            <input aria-required="true" id="username" name="username" type="text" maxlength="20" placeholder="Username" required>
         </div>
         <div>
-            <input id="password" type="password" maxlength="20" placeholder="Password" required>
+            <label for="password" hidden>contraseña</label>
+            <input aria-required="true" id="password" type="password" maxlength="20" placeholder="Password" required>
         </div>
         <div>
-            <input id="email" name="email" type="email" maxlength="30" placeholder="Email" required>
+            <label for="email" hidden>correo electronico</label>
+            <input aria-required="true" id="email" name="email" type="email" maxlength="30" placeholder="Email" required>
         </div>
         <input class="buttonSubm" type="submit" value="Registrar">
     </form>
