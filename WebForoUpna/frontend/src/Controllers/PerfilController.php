@@ -9,7 +9,6 @@ class PerfilController
 {
     public function __construct()
     {
-        session_start();
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -20,6 +19,15 @@ class PerfilController
     public function showPerfil(){
         try {
             return Perfil::makePerfil();
+        } catch (Exception $ex) {
+            http_response_code(400);
+            return $ex->getMessage();
+        }
+    }
+
+    public function showPerfilEditiar(){
+        try {
+            return Perfil::makeEditarPerfil();
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();

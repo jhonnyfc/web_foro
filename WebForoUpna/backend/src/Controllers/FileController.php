@@ -2,52 +2,53 @@
 
 namespace Foroupna\Controllers;
 
+use Foroupna\Models\Foro;
+use Foroupna\Models\User;
 use Exception;
+use Foroupna\Models\Session;
 
 class FileController
 {
+    public static function uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,$isPerfil){
+        $temp_file = $_FILES['file']['tmp_name'];
+        // $location = $dir . $_FILES['file']['name'];
+        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-    /**
-     * @throws Exception
-     */
-    public function saveImg(string $dir, string $filename): string
-    {
-        $target_dir = __DIR__ . "/../../public/imgs/" . $dir . "/" . $filename . "/";
-
-        for ( $i=0; $i < sizeof($_FILES['imgs']['name']); ++$i ) {
-
-            $img_name = $_FILES['imgs']['name'][$i];
-            $img_tmp = $_FILES['imgs']['tmp_name'][$i];
-
-            if ( !$this->isImage($img_tmp) ) {
-                return "Invalid image";
-            }
-
-            $imgFileType = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
-
-            if ( !$this->isImgFormatIsValid($imgFileType) ) {
-                return "Invalid image format (jpg, png, jpeg).";
-            }
-
-            $nextImgNumber = sizeof(scandir($target_dir)) - 1;
-
-            $target_file = $target_dir . $filename . "_" . $nextImgNumber . "." . $imgFileType;
-
-            move_uploaded_file($img_tmp, $target_file);
+        if (strcmp($ext,"jpg") != 0 && strcmp($ext,"jpeg") != 0){
+            throw new Exception("La foto debe de ser jpg o jpeg");
         }
 
-        return "Images successfully uploaded.";
+        // echo $fotoname.".".$ext." <br> ".$_FILES['file']['name']." <br>";
+
+        if (!$isPerfil)
+            $res = Foro::updateFoto($fotoname.".".$ext);
+        else {
+            $res = User::updateFoto($fotoname.".".$ext,$fotoname);
+        }
+
+        $location = $dir.$res;
+
+        header('Content-type: image/jpeg');
+        $thumb = self::mo_resizeImage($temp_file,$nuevo_ancho,$nuevo_alto);
+
+        // move_uploaded_file($thumb , $location);
+        if (!imagejpeg($thumb , $location)){
+            throw new Exception("Erro camibar redmimensioanar archivo");
+        }
+
+        return "Foto Subida Bien";
     }
 
+    public static function mo_resizeImage($temp_file,$nuevo_ancho,$nuevo_alto){
+        list($ancho, $alto) = getimagesize($temp_file);
 
-    private function isImage($img): bool
-    {
-        return !(getimagesize($img) === false);
+        // Cargar
+        $thumb = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
+        $origen = imagecreatefromjpeg($temp_file);
+
+        // Cambiar el tamaño
+        imagecopyresized($thumb, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho, $alto);
+
+        return $thumb;
     }
-
-    private function isImgFormatIsValid(string $imgFileType): bool
-    {
-        return !($imgFileType !== "jpg" && $imgFileType !== "png" && $imgFileType !== "jpeg");
-    }
-
 }

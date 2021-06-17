@@ -10,10 +10,6 @@ class UserController
 {
     public function __construct()
     {
-        // if(!isset($_COOKIE["PHPSESSID"]))
-        // {
-        session_start();
-        // }
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -160,5 +156,59 @@ class UserController
         return false;
     }
 
-    // =====  End of Input Data Validation  ======
+    public function uploadFoto(){
+        if (
+            empty($_POST['fotoname'])
+            || empty($_FILES)
+        ) {
+            http_response_code(400);
+            return 'Datos vacios';
+        }
+
+        $fotoname = Sanitizer::sanitize($_POST['fotoname']);
+        $nuevo_ancho = 230;
+        $nuevo_alto = 230;
+
+        try {
+            $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\perfil\\";
+            $data = FileController::uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,true);
+
+            return json_encode(array(0 => $data),true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al actualizar foto: '.$e->getMessage();
+        }
+    }
+
+    public function upData(){
+        if ( Session::get('user') === null ) {
+            http_response_code(400);
+            return "You must login.";
+        }
+
+        if (
+            empty($_POST['username'])
+            || empty($_POST['email'])
+        ) {
+            http_response_code(400);
+            return 'Datos vacios';
+        }
+
+        $username = Sanitizer::sanitize($_POST['username']);
+        $email = Sanitizer::sanitize($_POST['email']);
+
+        if (strcmp($username,Session::get("user")) != 0){
+            http_response_code(400);
+            return 'Error en datos de session';
+        }
+
+        try {
+            $data = User::updateData($username,$email);
+
+            return json_encode(array(0 => $data),true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear actualizar datos: '.$e->getMessage();
+        }
+    }
 }

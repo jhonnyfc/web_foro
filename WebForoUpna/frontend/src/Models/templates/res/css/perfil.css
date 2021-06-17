@@ -39,7 +39,23 @@ html {
     margin-top: 25px;
 }
 
-#contPerfil input{
+#contPerfil input.textIn{
+    font-size: 1.1em;
+    border: black;
+    border-style: solid;
+    border-width: 1.5px;
+    margin-top: 30px;
+    height: 45px;
+    width: 200px;
+}
+
+#contPerfil input#foto{
+	margin-top: 35px;
+	font-size: 0.95em;
+	margin-bottom: 15px;
+}
+
+#contPerfil button{
     font-size: 1.1em;
     border: black;
     border-style: solid;

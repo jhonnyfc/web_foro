@@ -10,7 +10,6 @@ class LoginController
 {
     public function __construct()
     {
-        session_start();
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {

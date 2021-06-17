@@ -8,7 +8,11 @@ function comentarFun(){
         success: function(result) {
             Swal.fire('Good job!',result[0],'success').then((res) => {
                 $('#formComment')[0].reset();
-                cargaDatos($("#id_foro").val(),$("#selectebt").text());
+                if ($("#selectebt").text() > 1)
+                    toLoad = $("#selectebt").text()
+                else
+                    toLoad = 1
+                cargaDatos($("#id_foro").val(),toLoad);
             });
         },
         error: function (request, status, error) {

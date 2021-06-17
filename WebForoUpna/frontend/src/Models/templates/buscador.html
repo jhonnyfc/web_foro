@@ -1,22 +1,17 @@
 <div id="contenedorBuscador">
     <h1> Buscador</h1>
-    <form action="">
+    <form onsubmit="busca(); return false">
         <input class="lupa" type="submit" value="🔍">
-        <input class="standInput" type="text" maxlength="25" required>
+        <input id="titulo" name="titulo" class="standInput" type="text" maxlength="25" required>
     </form>
 
+    <br><br><br>
     <div id="forosEncontrados">
-        <div class="foroResumen">
-            <div>
-                <h3>Titlo Foro</h3>
-            </div>
-            <div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam harum tempore est recusandae ad officiis nisi ullam esse animi, quasi quod optio qui quos, assumenda natus perferendis culpa voluptas omnis. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate recusandae a, nobis fugit unde totam enim ad consequuntur, accusamus veritatis minus delectus, et vero sequi. Ullam maxime deleniti est aperiam.</p>
-            </div>
+        <div id="resultadosBusqueda">
+            ##resulatados##
         </div>
-
         <div class="paginado">
-            <a href="">1</a> | .. | <a href="">5</a> | <a href="">6</a> |  <a href="">7</a> |  <a href="">8</a> |  <a href="">9</a> | ... | <a href="">25</a>
+            <ul id="pagindoID">##paginado##</ul>
         </div>
     </div>
 </div>

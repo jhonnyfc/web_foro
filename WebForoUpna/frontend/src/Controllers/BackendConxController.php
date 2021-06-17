@@ -9,7 +9,6 @@ class BackendConxController
 {
     public function __construct()
     {
-        session_start();
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -143,6 +142,32 @@ class BackendConxController
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();
+        }
+    }
+
+    public function updatePerfil(){
+        if (
+            empty($_POST['username'])
+            || empty($_POST['email'])
+        ) {
+            http_response_code(400);
+            return 'Datos vacios';
+        }
+
+        $username = Sanitizer::sanitize($_POST['username']);
+        $email = Sanitizer::sanitize($_POST['email']);
+
+        $data = array(
+            "username" => $username,
+            "email" => $email
+        );
+
+        try {
+            $res = BackendConx::getInstance()->postCall("user/updata",$data);
+            return json_encode($res,true);
+        } catch (Exception $e){
+            http_response_code(400);
+            return 'Error al crear actualizar datos: '.$e->getMessage();
         }
     }
 }

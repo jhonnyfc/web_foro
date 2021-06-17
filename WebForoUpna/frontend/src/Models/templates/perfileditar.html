@@ -1,0 +1,17 @@
+<div id="contPerfil">
+    <h1>Perfil</h1>
+    <img loading="lazy" class="circuloFoto" src="##foto##" alt="foto de perfil">
+
+    <form onsubmit="updata(); return false">
+        <div>
+            <input class="textIn" id="username" name="username" type="text" maxlength="20" placeholder="Username" value="##username##" disabled re>
+        </div>
+        <div>
+            <input id="foto" name="foto" type="file" name="foto" class="inputfile"/>
+        </div>
+        <div>
+            <input class="textIn" id="email" name="email" type="email" maxlength="20" placeholder="Email" value="##email##" required>
+        </div>
+        <input class="buttonSubm textIn" type="submit" value="Actualizar">
+    </form>
+</div>

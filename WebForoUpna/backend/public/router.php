@@ -12,6 +12,23 @@ use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 // Collector Init
 $route = new RouteCollector();
 
+// Session Init
+$segundosDuracionSession = 900;
+ini_set('session.gc_maxlifetime', $segundosDuracionSession);
+session_set_cookie_params($segundosDuracionSession);
+session_start();
+
+$now = time();
+if (isset($_SESSION['discard_after']) && $now > $_SESSION['discard_after']) {
+    // this session has worn out its welcome; kill it and start a brand new one
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+// either new or old, it should live at most for another hour
+$_SESSION['discard_after'] = $now + $segundosDuracionSession;
+
 // session_start();
 header('Access-Control-Allow-Origin: http://localhost:8080');
 // header('Access-Control-Allow-Origin: *');
@@ -34,6 +51,8 @@ $route->post(basename(__FILE__) . '/user/login', [UserController::class, 'signIn
 $route->get(basename(__FILE__) . '/user/logout', [UserController::class, 'logout']);
 $route->get(basename(__FILE__) . '/user/getUser', [UserController::class, 'getUser']);
 $route->get(basename(__FILE__) . '/user/find/{username}', [UserController::class, 'findUser']);
+$route->post(basename(__FILE__) . '/user/updata', [UserController::class, 'upData']);
+$route->post(basename(__FILE__) . '/user/upfoto', [UserController::class, 'uploadFoto']);
 /*----------  End of User Routes  ----------*/
 
 /*----------  Foro Routes  ----------*/

@@ -16,11 +16,6 @@ class Registrar
 
     public function __construct()
     {
-        // session_start();
-        if(!isset($_COOKIE["PHPSESSID"]))
-        {
-            session_start();
-        }
     }
 
     public static function makeRegistrar():string {

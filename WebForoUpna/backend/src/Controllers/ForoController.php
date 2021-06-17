@@ -4,13 +4,13 @@ namespace Foroupna\Controllers;
 
 use Foroupna\Models\Session;
 use Exception;
+use Foroupna\Controllers\FileController;
 use Foroupna\Models\Foro;
 
 class ForoController
 {
     public function __construct()
     {
-        session_start();
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -55,42 +55,14 @@ class ForoController
         }
 
         $fotoname = Sanitizer::sanitize($_POST['fotoname']);
+        $nuevo_ancho = 298;
+        $nuevo_alto = 152;
 
         try {
-            $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\";
+            $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\foro\\";
+            $data = FileController::uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,false);
 
-            if(!empty($_FILES)){
-
-                $temp_file = $_FILES['file']['tmp_name'];
-                // $location = $dir . $_FILES['file']['name'];
-                $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-
-                if (strcmp($ext,"jpg") != 0 && strcmp($ext,"jpeg") != 0){
-                    http_response_code(400);
-                    return "La foto debe de ser jpg o jpeg, el foro se quedara sin foto, si quiere subir foto contacte con el administrador, forUpna@email.com";
-                }
-
-                echo $fotoname.".".$ext." <br> ".$_FILES['file']['name']." <br>";
-
-                $res = Foro::updateFoto($fotoname.".".$ext);
-
-                $location = $dir.$res;
-
-                $nuevo_ancho = 298;
-                $nuevo_alto = 152;
-                header('Content-type: image/jpeg');
-                $thumb = self::mo_resizeImage($temp_file,$nuevo_ancho,$nuevo_alto);
-                // move_uploaded_file($thumb , $location);
-                if (!imagejpeg($thumb , $location)){
-                    http_response_code(400);
-                    return 'Erro camibar redmimensioanar archivo';
-                }
-
-                return json_encode(array(0 => "Foto Subida Bien"),true);
-            }
-
-            http_response_code(400);
-            return 'Erro al subir archivo';
+            return json_encode(array(0 => $data),true);
         } catch (Exception $e){
             http_response_code(400);
             return 'Error al crear foro'.$e->getMessage();
@@ -103,19 +75,6 @@ class ForoController
 
         $target_dir = __DIR__ . "/../../public/imgs/";
         echo var_dump(scandir($target_dir))."<br>";
-    }
-
-    public static function mo_resizeImage($temp_file,$nuevo_ancho,$nuevo_alto){
-        list($ancho, $alto) = getimagesize($temp_file);
-
-        // Cargar
-        $thumb = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
-        $origen = imagecreatefromjpeg($temp_file);
-
-        // Cambiar el tamaño
-        imagecopyresized($thumb, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho, $alto);
-
-        return $thumb;
     }
 
     public function getMostComment($number){        
@@ -165,16 +124,27 @@ class ForoController
     public function buscaForo(){
         if (
             empty($_POST['titulo'])
+            || empty($_POST['numRowXPag'])
+            || empty($_POST['pagina'])
         ) {
             http_response_code(400);
-            return 'Datos vacios';
+            return 'Datos vacios back';
         }
 
         $titulo = Sanitizer::sanitize($_POST['titulo']);
+        $numRowXPag = Sanitizer::sanitize($_POST['numRowXPag']);
+        $pagina = Sanitizer::sanitize($_POST['pagina']);
 
         try {
-            $res = Foro::buscaForo($titulo);
-            return json_encode($res,true);
+            $numTotalRows = Foro::countNumRowsForo($titulo);
+            $data = Foro::buscaForo($titulo,$numRowXPag,$pagina);
+
+            $dataOut = array(
+                0 => $numTotalRows,
+                1 => $data                
+            );
+
+            return json_encode($dataOut,true);
         } catch (Exception $e){
             http_response_code(400);
             return 'Error al crear foro'.$e->getMessage();

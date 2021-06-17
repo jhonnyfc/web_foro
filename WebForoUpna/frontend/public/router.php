@@ -20,6 +20,23 @@ use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 // Collector Init
 $route = new RouteCollector();
 
+// Session Init
+$segundosDuracionSession = 900;
+ini_set('session.gc_maxlifetime', $segundosDuracionSession);
+session_set_cookie_params($segundosDuracionSession);
+session_start();
+
+$now = time();
+if (isset($_SESSION['discard_after']) && $now > $_SESSION['discard_after']) {
+    // this session has worn out its welcome; kill it and start a brand new one
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+// either new or old, it should live at most for another hour
+$_SESSION['discard_after'] = $now + $segundosDuracionSession;
+
 // header('Access-Control-Allow-Origin: http://localhost:8080');
 header('Access-Control-Allow-Origin: *');
 // header('Access-Control-Allow-Credentials: true');
@@ -44,10 +61,12 @@ $route->get(basename(__FILE__) . '/registrar', [RegistrarController::class, 'sho
 
 /*----------  Buscador Routes  ----------*/
 $route->get(basename(__FILE__) . '/buscador', [BuscadorController::class, 'showBuscador']);
+$route->post(basename(__FILE__) . '/buscador/find', [BuscadorController::class, 'buscar']);
 /*----------  End of Buscador Routes  ----------*/
 
 /*----------  Perfil Routes  ----------*/
 $route->get(basename(__FILE__) . '/perfil', [PerfilController::class, 'showPerfil']);
+$route->get(basename(__FILE__) . '/perfil/editar', [PerfilController::class, 'showPerfilEditiar']);
 /*----------  End of Perfil Routes  ----------*/
 
 /*----------  CrearForo Routes  ----------*/
@@ -66,6 +85,7 @@ $route->get(basename(__FILE__) .'/back/checkUser',[BackendConxController::class,
 $route->post(basename(__FILE__) . '/back/makeforo', [BackendConxController::class, "upData"]);
 $route->post(basename(__FILE__) . '/back/registrar', [BackendConxController::class, "registar"]);
 $route->post(basename(__FILE__) . '/back/comentar', [BackendConxController::class, "comentar"]);
+$route->post(basename(__FILE__) . '/back/updateperfil', [BackendConxController::class, "updatePerfil"]);
 /*----------  End of BackenAuth Routes  ----------*/
 
 /*----------  Resurces Routes  ----------*/

@@ -38,7 +38,7 @@ class Foro
 
     public static function updateFoto($fotoname){
         try {
-            $pathFoto = "http://localhost:1234/imgs/".$fotoname;
+            $pathFoto = "http://localhost:1234/imgs/foro/".$fotoname;
             $query = "UPDATE foro SET foto_url=? WHERE id_foro=?";
 
             $conn = Database::getInstance()->getConnection();
@@ -100,15 +100,18 @@ class Foro
         }
     }
 
-    public static function buscaForo($titulo){
+    public static function buscaForo($titulo,$numRowXPag,$pagina){
         try {
             $query = "SELECT *
                     FROM foro f
-                    WHERE f.titulo LIKE '%?%'";
+                    WHERE f.titulo LIKE '%".$titulo."%' LIMIT ?,?";
+
+            $ini = (($pagina - 1) *  $numRowXPag );
+            $end = ($numRowXPag);
 
             $conn = Database::getInstance()->getConnection();
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("s",$titulo);
+            $stmt->bind_param("ss",$ini,$end);
 
             $stmt->execute();
             $res = $stmt->get_result();
@@ -118,8 +121,34 @@ class Foro
             while ($row = $res->fetch_assoc()) {
                 $data[] = $row;
             }
-
+            
             return $data;
+        } catch (mysqli_sql_exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public static function countNumRowsForo($titulo){
+        try {
+            $query = "SELECT count(f.id_foro) as num_filas
+                    FROM foro f
+                    WHERE f.titulo LIKE '%".$titulo."%'";
+
+            $conn = Database::getInstance()->getConnection();
+            $stmt = $conn->prepare($query);
+            // $stmt->bind_param("s",$titulo);
+
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $stmt->close();
+
+            $row = $res->fetch_assoc();
+
+            if ($row["num_filas"] == null){
+                return 0;
+            }
+
+            return $row["num_filas"];
         } catch (mysqli_sql_exception $ex) {
             throw $ex;
         }
@@ -148,28 +177,6 @@ class Foro
             }
 
             return $data;
-        } catch (mysqli_sql_exception $ex) {
-            throw $ex;
-        }
-    }
-
-    public static function countNumRowsForo($titulo):Integer{
-        try {
-            $query = "SELECT count(f.id_foro) as num_filas
-                    FROM foro f
-                    WHERE f.titulo LIKE '%?%'";
-
-            $conn = Database::getInstance()->getConnection();
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("s",$titulo);
-
-            $stmt->execute();
-            $res = $stmt->get_result();
-            $stmt->close();
-
-            $row = $res->fetch_assoc();
-
-            return $row["num_filas"];
         } catch (mysqli_sql_exception $ex) {
             throw $ex;
         }
@@ -206,7 +213,7 @@ class Foro
 
     public static function countNumRowsCommentForo($id_foro){
         try {
-            $query = "SELECT count(c.idcom) as num_filas
+            $query = "SELECT c.idcom
                     FROM comment c
                     WHERE c.id_foro = ?
                     GROUP BY c.id_foro";
@@ -221,7 +228,12 @@ class Foro
 
             $row = $res->fetch_assoc();
 
-            return $row["num_filas"];
+            // if ($row["num_filas"] == null){
+            //     return 0;
+            // }
+
+            // return $row["num_filas"];
+            return $res->num_rows;
         } catch (mysqli_sql_exception $ex) {
             throw $ex;
         }

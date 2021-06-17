@@ -1,13 +1,15 @@
 <div id="contPerfil">
     <h1>Perfil</h1>
-    <img loading="lazy" class="circuloFoto" src="res/default_sq.webp" alt="foto de perfil">
-    <form action="">
+    <img loading="lazy" class="circuloFoto" src="##foto##" alt="foto de perfil">
+    <form action="perfil/editar">
         <div>
-            <input type="text" maxlength="20" placeholder="Username" value="##username##" disabled>
+            <input class="textIn" type="text" maxlength="20" placeholder="Username" value="##username##" disabled>
         </div>
         <div>
-            <input type="email" maxlength="20" placeholder="Email" value="##email##" disabled>
+            <input class="textIn" type="email" maxlength="20" placeholder="Email" value="##email##" disabled>
         </div>
-        <input class="buttonSubm" type="submit" value="Editar">
+
+        <input class="buttonSubm textIn" type="submit" value="Editar">
+        <!-- <button  onclick="window.location.href='perfil/editar'">Editar</button> -->
     </form>
 </div>

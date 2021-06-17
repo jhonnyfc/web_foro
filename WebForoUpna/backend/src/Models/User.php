@@ -197,4 +197,39 @@ class User
     {
         echo "Hello";
     }
+
+    public static function updateFoto($fotoname,$username){
+        try {
+            $pathFoto = "http://localhost:1234/imgs/perfil/".$fotoname;
+            $query = "UPDATE usuario SET foto_url=? WHERE username LIKE '".$username."'";
+
+            $conn = Database::getInstance()->getConnection();
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s",$pathFoto);
+
+            $stmt->execute();
+            $stmt->close();
+
+            return $fotoname;
+        } catch (mysqli_sql_exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public static function updateData($username,$email){
+        try {
+            $query = "UPDATE usuario SET email=? WHERE username LIKE '".$username."'";
+
+            $conn = Database::getInstance()->getConnection();
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s",$email);
+
+            $stmt->execute();
+            $stmt->close();
+
+            return $username;
+        } catch (mysqli_sql_exception $ex) {
+            throw $ex;
+        }
+    }
 }

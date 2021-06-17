@@ -13,7 +13,6 @@ class ForoController
 {
     public function __construct()
     {
-        session_start();
         try {
             $_POST = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
@@ -28,7 +27,7 @@ class ForoController
         }
 
         $id_foro = Sanitizer::sanitize($id_foro);
-        $numRowXPag = 2;
+        $numRowXPag = 6;
         $paginaActual = 1;
 
         $data = array(
@@ -43,9 +42,9 @@ class ForoController
             $comments = $commentsData[1];
             $numroTotalFilas = $commentsData[0];
 
-            $mumPages = round($numroTotalFilas / $numRowXPag);
+            $numPages = ceil($numroTotalFilas / $numRowXPag);
             
-            return Foro::makeForo($forodata,$comments,$id_foro,$mumPages,$paginaActual);
+            return Foro::makeForo($forodata,$comments,$id_foro,$numPages,$paginaActual);
         } catch (Exception $ex) {
             http_response_code(400);
             return $ex->getMessage();
@@ -61,7 +60,7 @@ class ForoController
             return 'Datos vacios';
         }
 
-        $numRowXPag = 2;
+        $numRowXPag = 6;
         $id_foro = Sanitizer::sanitize($_POST['id_foro']);
         $pagina = Sanitizer::sanitize($_POST['pagina']);
 
@@ -76,10 +75,10 @@ class ForoController
             $comments = $commentsData[1];
             $numroTotalFilas = $commentsData[0];
 
-            $mumPages = round($numroTotalFilas / $numRowXPag);
+            $numPages = ceil($numroTotalFilas / $numRowXPag);
 
             $htmlCommets = Foro::makeComments($comments);
-            $htmlPaginado = Paginado::makePaginado($id_foro,$mumPages,$pagina);
+            $htmlPaginado = Paginado::makePaginado($id_foro,$numPages,$pagina);
             
             $data = array(
                 0 => $htmlCommets,
