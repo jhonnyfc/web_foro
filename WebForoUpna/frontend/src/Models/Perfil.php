@@ -52,7 +52,12 @@ class Perfil
             $perfil = file_get_contents(dirname(__FILE__)."/templates/perfileditar.html");
             $perfil = str_replace("##username##",$user["username"],$perfil);
             $perfil = str_replace("##email##",$user["email"],$perfil);
-            $perfil = str_replace("##foto##",$user["foto_url"],$perfil);
+
+            if (strcmp($user["foto_url"],"res/default_sq.webp") == 0)
+                $img = $navMove.$user["foto_url"];
+            else
+                $img = $user["foto_url"];
+            $perfil = str_replace("##foto##",$img,$perfil);
 
             $html = str_replace("##body##",$perfil,$html);
             return $html;

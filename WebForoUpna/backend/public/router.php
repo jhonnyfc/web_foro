@@ -16,13 +16,12 @@ $route = new RouteCollector();
 Session::loadSession();
 
 
-
 // Permitimos los orignes y los valores de los headers
 $allowedOrigins = [
     "http://localhost:80",
     "http://localhost:8080",
     "http://localhost",
-    "http://localhost:8787"
+    ORIGIN_NAME
 ];
 
 if (in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {

@@ -18,7 +18,8 @@ class Foro
     }
 
     public static function makeForo($forodata,$comments,$id_foro,$numPages,$paginaActual):string {
-        $html = Header::makeHeader("../"); 
+        $navMove = "../";
+        $html = Header::makeHeader($navMove); 
         $librerias = self::$linkSheet.self::$linkScript.self::$linkSheet2;
         $html = str_replace("##MdasLinksCss##",$librerias,$html);
 
@@ -28,7 +29,13 @@ class Foro
         $foro = file_get_contents(dirname(__FILE__)."/templates/foro.html");
         $foro = str_replace("##id_foro##",$forodata["id_foro"],$foro);
         $foro = str_replace("##TituloForo##",$forodata["titulo"],$foro);
-        $foro = str_replace("##urlfor##",$forodata["foto_url"],$foro);
+
+        if (strcmp($forodata["foto_url"],"res/default.webp") == 0)
+            $img = $navMove.$forodata["foto_url"];
+        else
+            $img = $forodata["foto_url"];
+        $foro = str_replace("##urlfor##",$img,$foro);
+        
         $foro = str_replace("##username##",$forodata["username"],$foro);
         $foro = str_replace("##textodescripcion##",$forodata["descripcion"],$foro);
 
