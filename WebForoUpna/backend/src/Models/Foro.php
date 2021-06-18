@@ -125,7 +125,7 @@ class Foro
 
             $row = $res->fetch_assoc();
 
-            if ($row["num_filas"] == null){
+            if (!isset($row["num_filas"])){
                 return 0;
             }
 
@@ -166,7 +166,7 @@ class Foro
 
     public static function countNumRowsCommentForo($id_foro){
         try {
-            $query = "SELECT c.idcom
+            $query = "SELECT count(c.idcom) as num_filas
                     FROM comment c
                     WHERE c.id_foro = ?
                     GROUP BY c.id_foro";
@@ -181,12 +181,11 @@ class Foro
 
             $row = $res->fetch_assoc();
 
-            // if ($row["num_filas"] == null){
-            //     return 0;
-            // }
+            if (!isset($row["num_filas"])){
+                return 0;
+            }
 
-            // return $row["num_filas"];
-            return $res->num_rows;
+            return $row["num_filas"];
         } catch (mysqli_sql_exception $ex) {
             throw $ex;
         }

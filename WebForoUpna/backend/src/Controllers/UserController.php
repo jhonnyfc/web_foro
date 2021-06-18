@@ -170,7 +170,7 @@ class UserController
         $nuevo_alto = 230;
 
         try {
-            $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\perfil\\";
+            $dir = dirname(dirname(dirname(__FILE__))).DIR_FOTOS_PERFIL;
             $data = FileController::uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,true);
 
             return json_encode(array(0 => $data),true);

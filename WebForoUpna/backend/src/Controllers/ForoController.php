@@ -7,6 +7,7 @@ use Exception;
 use Foroupna\Controllers\FileController;
 use Foroupna\Models\Foro;
 use Foroupna\Models\Comment;
+require_once __DIR__ . "/../config/config.php";
 
 class ForoController
 {
@@ -60,7 +61,7 @@ class ForoController
         $nuevo_alto = 152;
 
         try {
-            $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\foro\\";
+            $dir = dirname(dirname(dirname(__FILE__))).DIR_FOTOS_FORO;
             $data = FileController::uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,false);
             // echo $data;
             return json_encode(array(0 => $data),true);
