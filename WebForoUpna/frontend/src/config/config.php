@@ -1,3 +1,3 @@
 <?php
 
-const ORIGIN_NAME = "http://localhost";
+const ORIGIN_NAME = "http://localhost:8787";

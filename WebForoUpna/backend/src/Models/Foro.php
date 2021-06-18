@@ -5,6 +5,7 @@ namespace Foroupna\Models;
 use Exception;
 use mysqli_sql_exception;
 use phpDocumentor\Reflection\Types\Integer;
+require_once __DIR__ . "/../config/config.php";
 
 // Para quitar los reportes de error  o wringis
 

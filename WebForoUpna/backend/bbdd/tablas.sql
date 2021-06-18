@@ -2,14 +2,14 @@ CREATE TABLE usuario(
     username varchar(20) NOT NULL UNIQUE,
     password varchar(255) NOT NULL,
     email varchar(30) NOT NULL,
-    foto_url varchar(255) DEFAULT 'http://localhost:80/router.php/res/default_sq.webp',
+    foto_url varchar(255) DEFAULT 'http://localhost:8787/router.php/res/default_sq.webp',
     PRIMARY KEY (username)
 );
 
 CREATE TABLE foro(
     id_foro int(11) NOT NULL AUTO_INCREMENT,
     titulo varchar(30) NOT NULL UNIQUE,
-    foto_url varchar(255) DEFAULT 'http://localhost:80/router.php/res/default.webp',
+    foto_url varchar(255) DEFAULT 'http://localhost:8787/router.php/res/default.webp',
     username varchar(20) NOT NULL,
     descripcion varchar(1200) NOT NULL,
     PRIMARY KEY (id_foro),
