@@ -30,6 +30,9 @@ header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Conte
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
+/*----------  favicon Routes  ----------*/
+$route->get(basename(__FILE__) . '/favicon.ico',function () {return "Root";});
+/*----------  End of favicon Routes  ----------*/
 
 /*----------  Home Routes  ----------*/
 $route->get(basename(__FILE__) . '/', [HomeController::class, 'redirect']);
