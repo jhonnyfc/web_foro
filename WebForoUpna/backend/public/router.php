@@ -21,7 +21,8 @@ Session::loadSession();
 $allowedOrigins = [
     "http://localhost:80",
     "http://localhost:8080",
-    "http://localhost"
+    "http://localhost",
+    "http://localhost:8787"
 ];
 
 if (in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
