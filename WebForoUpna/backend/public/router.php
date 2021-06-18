@@ -15,21 +15,28 @@ $route = new RouteCollector();
 // Session Init
 Session::loadSession();
 
-// session_start();
-header('Access-Control-Allow-Origin: http://localhost:8080');
+
+
+// Permitimos los orignes y los valores de los headers
+$allowedOrigins = [
+    "http://localhost:80",
+    "http://localhost:8080",
+    "http://localhost"
+];
+
+if (in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+}
+
+// header('Access-Control-Allow-Origin: http://localhost');
 // header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Max-Age: 5');  
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
-$route->get(
-    basename(__FILE__) . "/",
-    function () {
-        return "Root";
-    }
-);
+
+$route->get(basename(__FILE__) . "/",function () {return "Root";});
 
 /*----------  User Routes  ----------*/
 $route->post(basename(__FILE__) . '/user/signup', [UserController::class, 'signUp']);

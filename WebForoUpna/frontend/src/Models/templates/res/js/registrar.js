@@ -1,7 +1,7 @@
 function registrar(){
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/router.php/back/registrar",
+        url: "##ORIGIN_NAME##/router.php/back/registrar",
         data: {username:$("#username").val(), password:$("#password").val(), email:$("#email").val()},
         withCredentials: true,
         dataType: "json",

@@ -25,8 +25,13 @@ class BackendConx
             Session::put('cookie', $jar);
         }
 
+        require_once __DIR__ . "/../config/config.php";
+
         $this->client = new Client(array(
-            'cookies' => $jar
+            'cookies' => $jar,
+            'headers' => [
+                'Origin' => ORIGIN_NAME,
+            ]
         ));
     }
 

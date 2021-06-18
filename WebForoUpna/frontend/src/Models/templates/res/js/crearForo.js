@@ -1,7 +1,7 @@
 function creaForo() {
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/router.php/back/makeforo",
+        url: "##ORIGIN_NAME##/router.php/back/makeforo",
         data: {titulo:$("#titulo").val(), descripcion:$("#descripcion").val()},
         withCredentials: true,
         dataType: "json",
@@ -10,7 +10,7 @@ function creaForo() {
             subeFoto(result[0]);
         },
         error: function (request, status, error) {
-            Swal.fire('Error!',request.responseText,'error');
+            Swal.fire('Error!!',request.responseText,'error');
         }
     });
 }
@@ -28,12 +28,12 @@ function subeFoto(fotname) {
         contentType: false,
         processData: false,
         success: function(result) {
-            Swal.fire('Good job!',"Foto subida bien",'success').then((result) => {
+            Swal.fire('Good job!',"Foto subida bien",'success').then((res) => {
                 $('#fromMakeforo')[0].reset();
             });
         },
         error: function (request, status, error) {
-            Swal.fire('Error!',request.responseText,'error');
+            Swal.fire('Error!!!',request.responseText,'error');
         }
     });
 }

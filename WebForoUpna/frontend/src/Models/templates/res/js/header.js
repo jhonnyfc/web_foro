@@ -1,7 +1,7 @@
 function logout(nav = ""){
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/router.php/back/logOut",
+        url: "##ORIGIN_NAME##/router.php/back/logOut",
         withCredentials: true,
         dataType: "json",
         success: function(result) {

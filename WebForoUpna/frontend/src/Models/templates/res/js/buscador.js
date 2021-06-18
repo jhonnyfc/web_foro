@@ -1,7 +1,7 @@
 function busca(){
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/router.php/buscador/find",
+        url: "##ORIGIN_NAME##/router.php/buscador/find",
         data: {titulo:$("#titulo").val(), pagina:1},
         withCredentials: true,
         dataType: "json",
@@ -18,7 +18,7 @@ function busca(){
 function cargaDatos(titulo,pagToloadNext) {
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/router.php/buscador/find",
+        url: "##ORIGIN_NAME##/router.php/buscador/find",
         data: {titulo:titulo, pagina:pagToloadNext},
         withCredentials: true,
         dataType: "json",

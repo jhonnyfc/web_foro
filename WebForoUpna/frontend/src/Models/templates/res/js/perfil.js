@@ -1,7 +1,7 @@
 function updata() {
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/router.php/back/updateperfil",
+        url: "##ORIGIN_NAME##/router.php/back/updateperfil",
         data: {username:$("#username").val(), email:$("#email").val()},
         withCredentials: true,
         dataType: "json",
@@ -15,7 +15,7 @@ function updata() {
             }
         },
         error: function (request, status, error) {
-            Swal.fire('Error!',request.responseText,'error');
+            Swal.fire('Error! data',request.responseText,'error');
         }
     });
 }
@@ -33,7 +33,7 @@ function subeFoto(fotname) {
         contentType: false,
         processData: false,
         success: function(result) {
-            Swal.fire('Good job!',"Datos actualizados correctamente, con foto",'success').then((result) => {
+            Swal.fire('Good job!',"Datos actualizados correctamente, con foto",'success').then((res) => {
                 // ir a perfil
                 window.location.href = "../perfil";
             });

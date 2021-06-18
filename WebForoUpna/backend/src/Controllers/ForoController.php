@@ -62,8 +62,9 @@ class ForoController
         try {
             $dir = dirname(dirname(dirname(__FILE__)))."\\public\\imgs\\foro\\";
             $data = FileController::uploadFoto($dir,$fotoname,$nuevo_ancho,$nuevo_alto,false);
-
+            // echo $data;
             return json_encode(array(0 => $data),true);
+            // return $data;
         } catch (Exception $e){
             http_response_code(400);
             return 'Error al crear foro'.$e->getMessage();

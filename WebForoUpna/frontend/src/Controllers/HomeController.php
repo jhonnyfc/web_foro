@@ -22,8 +22,9 @@ class HomeController
     public function showHome(){
         try {
             $number = 3;
+            $number2 = 4;
             $foros = BackendConx::getInstance()->getCall("foro/getmostcommet/".$number);
-            $comments = BackendConx::getInstance()->getCall("foro/getlastncomment/".$number);
+            $comments = BackendConx::getInstance()->getCall("foro/getlastncomment/".$number2);
             // $comments = "";//BackendConx::getInstance()->getCall("foro/getlastncomment/".$number);
             return Home::makeHome($foros,$comments);
         } catch (Exception $ex) {

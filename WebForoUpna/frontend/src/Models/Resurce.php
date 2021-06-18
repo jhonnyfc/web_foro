@@ -3,6 +3,7 @@
 namespace Foroupna\Models;
 
 use Exception;
+require_once __DIR__ . "/../config/config.php";
 
 class Resurce
 {
@@ -17,6 +18,8 @@ class Resurce
 
     public static function findCss($cssname):string {
         $fichero = file_get_contents(dirname(__FILE__)."/templates/res/css/$cssname");
+        $fichero = str_replace("##ORIGIN_NAME##",ORIGIN_NAME,$fichero);
+
         if (!(gettype($fichero) === "string")) {
             throw new Exception("Fichero no encontrado");
             // return $result;
@@ -27,6 +30,8 @@ class Resurce
 
     public static function findDefFoto($fotoName):string {
         $fichero = file_get_contents(dirname(__FILE__)."/templates/res/$fotoName");
+        $fichero = str_replace("##ORIGIN_NAME##",ORIGIN_NAME,$fichero);
+
         if (!(gettype($fichero) === "string")) {
             throw new Exception("Fichero no encontrado");
             // return $result;
@@ -37,6 +42,8 @@ class Resurce
 
     public static function findJs($jsname):string {
         $fichero = file_get_contents(dirname(__FILE__)."/templates/res/js/$jsname");
+        $fichero = str_replace("##ORIGIN_NAME##",ORIGIN_NAME,$fichero);
+
         if (!(gettype($fichero) === "string")) {
             throw new Exception("Fichero no encontrado");
             // return $result;

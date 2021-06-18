@@ -6,7 +6,9 @@ class Navigate
 {
     public static function redirect($path): void
     {
-        $url = "http://localhost:8080/router.php/".$path;
+        require_once __DIR__ . "/../config/config.php";
+        
+        $url = ORIGIN_NAME."/router.php/".$path;
         header("Location: $url");
     }
 }

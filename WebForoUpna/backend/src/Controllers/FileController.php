@@ -5,7 +5,6 @@ namespace Foroupna\Controllers;
 use Foroupna\Models\Foro;
 use Foroupna\Models\User;
 use Exception;
-use Foroupna\Models\Session;
 
 class FileController
 {
@@ -20,7 +19,7 @@ class FileController
 
         // echo $fotoname.".".$ext." <br> ".$_FILES['file']['name']." <br>";
 
-        if (!$isPerfil)
+        if ($isPerfil === false)
             $res = Foro::updateFoto($fotoname.".".$ext);
         else {
             $res = User::updateFoto($fotoname.".".$ext,$fotoname);

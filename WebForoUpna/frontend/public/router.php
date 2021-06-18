@@ -23,10 +23,9 @@ $route = new RouteCollector();
 // Session Init
 Session::loadSession();
 
-// header('Access-Control-Allow-Origin: http://localhost:8080');
+// Permitimos los orignes y los valores de los headers
 header('Access-Control-Allow-Origin: *');
 // header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Max-Age: 5');  
 header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");

@@ -1,7 +1,7 @@
 function comentarFun(){
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/router.php/back/comentar",
+        url: "##ORIGIN_NAME##/router.php/back/comentar",
         data: {comentario:$("#comentario").val(), id_foro:$("#id_foro").val()},
         withCredentials: true,
         dataType: "json",
@@ -24,7 +24,7 @@ function comentarFun(){
 function cargaDatos(keyword,pagToloadNext){
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/router.php/foro/loadComments",
+        url: "##ORIGIN_NAME##/router.php/foro/loadComments",
         data: {id_foro:keyword, pagina:pagToloadNext},
         withCredentials: true,
         dataType: "json",
